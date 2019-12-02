@@ -11,6 +11,9 @@ nav {
   nav svg {
     width: 48px; }
 
+.text-gray {
+  color: #657786; }
+
 .main {
   width: 100%;
   max-width: 600px;
@@ -29,6 +32,78 @@ nav {
     height: 48px;
     border: 1px solid #fff;
     box-sizing: border-box; }
+  .main .twit_box {
+    padding: 10px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #e6ecf0; }
+    .main .twit_box:hover {
+      background-color: #f5f8fa; }
+    .main .twit_box > a {
+      display: inline-flex;
+      flex: none;
+      margin: 0 5px; }
+    .main .twit_box .pre_box {
+      display: inline-flex;
+      color: #14171a;
+      flex: 1; }
+      .main .twit_box .pre_box .box_info {
+        padding: 0 10px;
+        font-size: 15px;
+        width: 100%; }
+        .main .twit_box .pre_box .box_info h4 {
+          font-size: 15px; }
+        .main .twit_box .pre_box .box_info .hashtag {
+          color: #1b95e0; }
+        .main .twit_box .pre_box .box_info .media_wrap {
+          border-radius: 14px;
+          padding: 0;
+          position: relative;
+          overflow: hidden; }
+          .main .twit_box .pre_box .box_info .media_wrap.image_2 {
+            display: flex; }
+            .main .twit_box .pre_box .box_info .media_wrap.image_2 .media_content img {
+              max-height: 100%;
+              max-width: initial;
+              left: inherit; }
+          .main .twit_box .pre_box .box_info .media_wrap.image_4 {
+            display: flex; }
+          .main .twit_box .pre_box .box_info .media_wrap .media_content {
+            position: relative;
+            padding-top: 56.25%;
+            overflow: hidden;
+            box-sizing: border-box;
+            border: 1px solid #fff;
+            /* 
+              1:1 : padding-top: 100%;
+              2:1 : padding-top: 50%
+              1:2 : padding-top: 200%
+              4:3 : padding-top: 75%
+              16:9 : padding-top: 56.25%
+*/ }
+            .main .twit_box .pre_box .box_info .media_wrap .media_content img,
+            .main .twit_box .pre_box .box_info .media_wrap .media_content video {
+              position: absolute;
+              top: 0;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              max-width: 100%;
+              height: auto; }
+    .main .twit_box .twit_box_footer {
+      justify-content: space-between; }
+      .main .twit_box .twit_box_footer > span {
+        display: inline-flex;
+        color: #657786;
+        transition: color 0.2s; }
+        .main .twit_box .twit_box_footer > span > span {
+          padding: 3px;
+          border-radius: 50%; }
+        .main .twit_box .twit_box_footer > span .retwit:hover {
+          color: #17bf63;
+          cursor: pointer; }
+        .main .twit_box .twit_box_footer > span .icon {
+          fill: #657786;
+          width: 1.2rem; }
 
 /*sass --watch public/scss/style.scss:public/css/share_style.css*/
 
