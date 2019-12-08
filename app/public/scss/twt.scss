@@ -1,10 +1,19 @@
+$twitter_color: rgb(29, 161, 242);
+$twitter_color_opacity2 : rgba(29, 161, 242, 0.2);
+$white_color: #fff;
+$black_color : #000;
+$twitter_text_color: rgb(20, 23, 26);
+$twitter_text_gray_color : rgb(101, 119, 134);
+$twitter_dark_color:rgb(26, 145, 218);
+
+
 html,body{
   padding:0;
   margin:0;
   width:100%;
   height:100%;
+  line-height: 1.3125;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
-
 }
 
 nav{
@@ -15,13 +24,82 @@ nav{
   }
 }
 
-.text-gray{
-  color:rgb(101, 119, 134);
+.btn-circle{
+  border-radius:50%;
+  padding: 0.5rem 0.7rem;
 }
+
+.btn-rounded{
+  border-radius: 1.25rem;
+
+}
+
+.offical-mark{
+  height:1.25em;
+  fill:$twitter_color
+}
+
+.btn-twitter{
+  border: 1px solid $twitter_color;
+  color:$white_color;
+  background:$twitter_color;
+  svg{
+    fill:$white_color;
+    width: 1.2rem;
+  }
+  &:hover,
+  &:focus{
+    color:#fff;
+    background:$twitter_dark_color;
+  }
+}
+
+.icon{
+  margin-right:5px;
+  fill:$twitter_text_gray_color;
+  width:1.2rem;
+}
+
+.btn-outline-twitter{
+  border: 1px solid $twitter_color;
+  color:$twitter_color;
+  background:$white_color;
+  svg{
+    fill:$twitter_color;
+    width: 1.2rem;
+  }
+  &:hover,
+  &:focus{
+    background:$twitter_color_opacity2;
+  }
+}
+
+.text-gray{
+  color: $twitter_text_gray_color;
+  fill:$twitter_text_gray_color;
+}
+
 .main{
+  padding-top:60px;
   width:100%;
   max-width:600px;
   margin: 0 auto;
+  .main-header{
+    background:$white_color;
+    height:60px;
+    width:100%;
+    max-width:600px;
+    margin:0 auto;
+    top:0;
+    left:0;
+    z-index:99;
+    h2{
+      font-size:19px;
+    }
+    p{
+      font-size:13px;
+    }
+  }
   img{
     max-width:100%;
   }
@@ -37,7 +115,69 @@ nav{
       border:4px solid #fff;
       box-sizing: border-box;
     }
+    .justify-content-between.align-items-center{
+      position: absolute;
+      width:100%;
+      top:140px;
+
+    }
+    .btn_wrap{
+      .btn-circle{
+        padding: 0.4rem 0.5rem;
+        svg{
+          width:1.4rem;
+        }
+      }
+    }
+    .profile_info{
+    
+      margin-top:70px;
+      h2{
+        font-size:19px;
+      }
+      .twt_id{
+        font-size:15px;
+      }
+      p{
+        font-size:15px;
+      }
+    }
   }
+  #twitterTab{
+    .nav-item{
+      width:25%;
+      text-align:center;
+      font-weight:bold;
+      font-size:15px;
+      
+      &:hover{
+      
+        background:$twitter_color_opacity2;
+        
+      }
+      .nav-link{
+        color:$twitter_text_gray_color;
+        padding:1rem;
+        border:none;
+        box-sizing: border-box;
+
+        &:hover{
+          border: #fff;
+          color:$twitter_color;
+
+        }
+      &.active{
+        color:$twitter_color;
+        border-top: none;
+        border-left:none;
+        border-right:none;
+        border-bottom:2px solid $twitter_color;
+      }
+    }
+    }    
+
+  }
+ 
   .tab-content{
     .profile_img{
       width:48px;
@@ -129,7 +269,6 @@ nav{
         color:rgb(101, 119, 134);
         transition:color 0.2s;
         >span{
-          padding:3px;
           border-radius: 50%;
         }
         .retwit{
@@ -138,10 +277,7 @@ nav{
             cursor:pointer;
           }
         }
-        .icon{
-          fill:rgb(101, 119, 134);
-          width:1.2rem;
-        }
+       
       }
     }
   }
