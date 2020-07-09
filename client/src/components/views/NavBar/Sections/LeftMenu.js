@@ -9,21 +9,14 @@ function LeftMenu(props) {
     <Menu.Item key="main">
       <a href="/">Home</a>
     </Menu.Item>
-    <SubMenu title={<span>Project</span>} href="/project">
-      <MenuItemGroup title="회사 프로젝트">
-        <Menu.Item key="setting:1">Option 1</Menu.Item>
-        <Menu.Item key="setting:2">Option 2</Menu.Item>
-      </MenuItemGroup>
-      <MenuItemGroup title="개인프로젝트">
-        <Menu.Item key="setting:3">Option 3</Menu.Item>
-        <Menu.Item key="setting:4">Option 4</Menu.Item>
-      </MenuItemGroup>
-    </SubMenu>
+    <Menu.Item key="about">
+      <a href="/about">About</a>
+    </Menu.Item>
+    <Menu.Item key="project">
+      <a href="/project">Project</a>
+    </Menu.Item>
     <Menu.Item key="calligraphy">
       <a href="/calligraphy">Calligraphy</a>
-    </Menu.Item>
-    <Menu.Item key="contact">
-      <a href="/contact">Contact Me</a>
     </Menu.Item>
   </Menu>
   )

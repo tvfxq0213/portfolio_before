@@ -41,8 +41,15 @@ input.error {
   width:100%;
   margin: 0 auto;
   max-width:1080px;
+  padding: 0 5%;
+  box-sizing: border-box;
 }
 
+.uploadProject{
+  .ant-calendar-picker{
+    width:100%;
+  }
+}
 
 .text-center{text-align:center}
 .text-right{text-align:right}
@@ -57,4 +64,8 @@ input.error {
 
 footer{
   height:80px; display:flex; flex-direction: column; align-items: center; justify-content: center; font-size:1rem; text-align:center;
+}
+
+@media (max-width: 767px) {
+  .container{padding: 0 3%;}
 }

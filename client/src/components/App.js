@@ -8,8 +8,7 @@ import RegisterPage from "./views/RegisterPage/RegisterPage.js";
 import ProjectListPage from "./views/Project/ProjectListPage.js";
 import ProjectDetailPage from "./views/Project/ProjectDetailPage.js";
 import ProjectUploadPage from "./views/Project/ProjectUploadPage.js"
-import ContactMePage from "./views/ContactMePage/ContactMePage.js"
-
+import AboutPage from "./views/About/AboutPage.js"
 import NavBar from "./views/NavBar/NavBar";
 import Footer from "./views/Footer/Footer"
 
@@ -26,7 +25,8 @@ function App() {
           <Route exact path="/" component={Auth(LandingPage, null)} />
           <Route exact path="/login" component={Auth(LoginPage, false)} />
           <Route exact path="/register" component={Auth(RegisterPage, false)} />
-          <Route exact path="/contact" component={Auth(ContactMePage, null)} />
+          <Route exact path="/about" component={Auth(AboutPage, null)} />
+
           <Route exact path="/project" component={Auth(ProjectListPage, null)} />
           <Route exact path="/projectUpload" component={Auth(ProjectUploadPage, true)} />
           <Route exact path="/project:projectId" component={Auth(ProjectDetailPage, true)}/>
