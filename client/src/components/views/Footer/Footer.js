@@ -1,10 +1,9 @@
 import React from 'react'
-import {Icon} from 'antd';
 
 function Footer() {
     return (
         <footer>
-           <p> copyright © Narae. all rights reserved <Icon type="smile" /></p>
+           <p> copyright © Narae. all rights reserved </p>
         </footer>
     )
 }
