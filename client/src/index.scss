@@ -1,26 +1,30 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
-body, html {
+body {
   margin: 0;
-  padding:0;
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: 14px;
-  line-height: 1.5;
-  color: #24292e;
-  background-color: #fff;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
-.container{
-  width:100%;
-  max-width:1080px;
-  margin: 0 auto;
-  height:100vh;
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 14px;
+  line-height: 1.5;
+  color: #24292e;
+  background-color: #fff;
+}
+
+.app {
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 input.error {
@@ -48,20 +52,4 @@ input.error {
 
 footer{
   height:80px; display:flex; flex-direction: column; align-items: center; justify-content: center; font-size:1rem; text-align:center;
-}
-
-.page_title{
-  font-weight:500;
-  position: relative;
-  margin: 20px 0 40px;
-  &:after{
-    position: absolute;
-    content:"";
-    display:inline-block;
-    width:50px;
-    bottom:-3px;
-    left:0;
-    height:2px;
-    background:#961220;
-  }
 }
