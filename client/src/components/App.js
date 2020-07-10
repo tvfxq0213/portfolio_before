@@ -32,11 +32,11 @@ function App() {
 
           <Route exact path="/project" component={Auth(ProjectListPage, null)} />
           <Route exact path="/projectUpload" component={Auth(ProjectUploadPage, true)} />
-          <Route exact path="/project:projectId" component={Auth(ProjectDetailPage, true)}/>
+          <Route exact path="/project/:projectId" component={Auth(ProjectDetailPage, true)}/>
 
           <Route exact path="/calligraphy" component={Auth(CalligraphyListPage, null)} />
           <Route exact path="/calligraphyUpload" component={Auth(CalligraphyUploadPage, true)} />
-          <Route exact path="/calligraphy:calligraphyId" component={Auth(CalligraphyDetailPage, true)}/>
+          <Route exact path="/calligraphy/:calligraphyId" component={Auth(CalligraphyDetailPage, true)}/>
         </Switch>
       </div>
       <Footer />

@@ -2,8 +2,8 @@ import React from 'react'
 
 function ProjectDetailPage() {
   return (
-    <div>
-      
+    <div className="container">
+      Project Detail
     </div>
   )
 }

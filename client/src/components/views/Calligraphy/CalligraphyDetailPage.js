@@ -2,7 +2,8 @@ import React from 'react'
 
 function CalligraphyDetailPage() {
   return (
-    <div>
+    <div className="container">
+      CalligraphyDetailPage
       
     </div>
   )
