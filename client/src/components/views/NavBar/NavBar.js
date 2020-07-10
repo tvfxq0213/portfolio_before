@@ -6,7 +6,7 @@ import {
   AlignRightOutlined
 } from '@ant-design/icons';
 
-import './Sections/Navbar.css';
+import './Sections/Navbar.scss';
 
 function NavBar() {
   const [visible, setVisible] = useState(false)
