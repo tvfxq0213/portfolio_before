@@ -16,8 +16,7 @@ var storage = multer.diskStorage({
   },
   filename: (req, file, cb) => {
       cb(null, `${Date.now()}_${file.originalname}`)
-  },
-
+  }
 })
 
 const upload = multer({storage:storage}).single("file")
@@ -36,51 +35,13 @@ router.post('/uploadfiles', (req,res)=>{
 });
 
 
-router.post("/thumbnail", (req, res) => {
-
-  
-  let thumbsFilePath ="";
-  let fileDuration ="";
-
-  ffmpeg.ffprobe(req.body.filePath, function(err, metadata) {
-    if (err)
-    {
-        console.log(err);
-    }
-    else{
-        console.log(metadata);
-    }
-    console.dir(metadata);
-    fileDuration = metadata.format.duration;
-
-  });
-
-
-  ffmpeg(req.body.filePath)
-      .on('filenames', function (filenames) {
-          console.log('Will generate ' + filenames.join(', '))
-          thumbsFilePath = "uploads/thumbnails/" + filenames[0];
-      })
-      .on('end', function () {
-          console.log('Screenshots taken');
-          return res.json({ success: true, thumbsFilePath: thumbsFilePath, fileDuration: fileDuration})
-      })
-      .screenshots({
-          // Will take screens at 20%, 40%, 60% and 80% of the video
-          count: 1,
-          folder: 'uploads/thumbnails',
-          size:'640x360',
-          // %b input basename ( filename w/o extension )
-          filename:'thumbnail-%b.png'
-      });
-
-});
 
 router.post('/uploadProject', (req,res)=>{
 
   //비디오를 정보들을 저장한다.
 
   const project = new Project(req.body);
+  console.log(req.body)
 
   project.save((err, doc) => {
     if(err) return res.json({success: false, err})
@@ -95,9 +56,9 @@ router.get('/getProjects', (req,res)=>{
 
   Project.find()
   .populate('writer')
-  .exec((err, videos )=>{
+  .exec((err, projects )=>{
     if(err) return res.status(400).send(err)
-    res.status(200).json({success: true, videos})
+    res.status(200).json({success: true, projects})
   })
 
 });
@@ -107,9 +68,9 @@ router.post('/getProjectDetail', (req,res)=>{
   //비디오를 DB에서 가져와서 클라이언트에 보낸다.  
   Project.findOne({ "_id" : req.body.videoId })
   .populate('writer')
-  .exec((err, video) => {
+  .exec((err, project) => {
       if(err) return res.status(400).send(err);
-      res.status(200).json({ success: true, video })
+      res.status(200).json({ success: true, project })
   })
 
 });

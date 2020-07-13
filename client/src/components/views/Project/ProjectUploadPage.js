@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react'
-import { Form, Input, DatePicker, Col, Row, InputNumber, Button, Select } from 'antd';
+import { Form, Input, DatePicker, Col, Row,  Upload, message , Button, Select } from 'antd';
+import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
+import Dropzone from 'react-dropzone';
 import { useSelector } from "react-redux";
 
 
@@ -12,16 +14,6 @@ const layout = {
   wrapperCol: { span: 16 },
 };
 
-const validateMessages = {
-  required: '${label} is required!',
-  types: {
-    email: '${label} is not validate email!',
-    number: '${label} is not a validate number!',
-  },
-  number: {
-    range: '${label} must be between ${min} and ${max}',
-  },
-};
 const PrivateOptions = [
   { value: 0, label: 'Private' },
   { value: 1, label: 'Public' }
@@ -43,7 +35,7 @@ function ProjectUploadPage(props) {
   const [Tags, setTags] = useState("")
   const [Privacy, setPrivacy] = useState(0)
   const [Categories, setCategories] = useState(1)
-  const [ThumbnailPath, setThumbnailPath] = useState("")
+  const [FilePath, setFilePath] = useState("")
 
 
   const handleChangeTitle = (event) => {
@@ -70,18 +62,88 @@ function ProjectUploadPage(props) {
     setTags(event.currentTarget.value)
   }
 
+  const onDrop = (files) => {
 
-  const onSubmit = values => {
-    console.log(values);
+    let formData = new FormData();
+    const config = {
+        header: { 'content-type': 'multipart/form-data' }
+    }
+    formData.append("file", files[0])
+
+    Axios.post('/api/project/uploadfiles', formData, config)
+        .then(response => {
+            if (response.data.success) {
+                let variable = {
+                    filePath: response.data.url,
+                    fileName: response.data.fileName
+                }
+                setFilePath(response.data.url)
+
+            } else {
+                alert('failed to save the video in server')
+            }
+        })
+
+}
+
+
+  const onSubmit = (event) => {
+    event.preventDefault();
+
+    if (user.userData && !user.userData.isAuth) {
+      return alert('Please Log in First')
+  }
+
+  if (title === "" || Description === "" ||
+      Categories === "" || subTitle === "" ||
+      startDate === "" || endDate === "" ||
+      Skills === "" || Privacy === "" ||
+      Tags === "" ) {
+      return alert('Please first fill all the fields')
+  }
+
+    const variables = {
+        writer: user.userData._id,
+        projectTitle: title,
+        projectSubTitle: subTitle,
+        description: Description,
+        skills: Skills,
+        startDate: startDate,
+        endDate: endDate,
+        privacy: Privacy,
+        category: Categories,
+        tags: Tags,
+        Thumbnail: FilePath
+
+    }
+
+    console.log(variables);
+
+    Axios.post('/api/project/uploadProject', variables)
+          .then(response => {
+            console.log(response);
+              if (response.data.success) {
+                  alert('프로젝트가 성공적으로 업로드되었습니다.')
+                  setTimeout(()=> {
+                    props.history.push('/project')
+
+                  },3000)
+              } else {
+                  alert('Failed to upload video')
+              }
+          })
+
   };
 
   const handleChangePrivacy = (event) => {
-    setPrivacy(event)
+    setPrivacy(event.value)
   }
 
   const handleChangeCategory = (event) => {
-     setCategories(event)
+     setCategories(event.value)
   }
+
+
 
   return (
     <div className="container">
@@ -161,6 +223,31 @@ function ProjectUploadPage(props) {
             onChange={handleChangeTags}
             value={Tags}>
           </Input>
+        </div>
+
+        <div className="input_wrap">
+          <label>Thumbnail Image Upload</label>
+          <div style={{display:'flex', justifyContent: 'space-between'}}>
+
+          <Dropzone
+            onDrop={onDrop}
+            multiple={false} maxSize={800000000}>
+            {({ getRootProps, getInputProps }) => (
+                <div style={{ width: '300px', height: '240px', border: '1px solid lightgray', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                    {...getRootProps()}
+                >
+                    <input {...getInputProps()} />
+                    <PlusOutlined style={{ fontSize: '3rem' }} />
+
+                </div>
+            )}
+          </Dropzone>
+          {FilePath !== "" &&
+            <div>
+              <img src={`http://localhost:5000/${FilePath}`} alt="haha" />
+            </div>
+          }
+          </div>
         </div>
 
       
