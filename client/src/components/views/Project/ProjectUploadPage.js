@@ -39,7 +39,9 @@ function ProjectUploadPage(props) {
   const [Description, setDescription] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const [privacy, setPrivacy] = useState(0)
+  const [Skills, setSkills] = useState("")
+  const [Tags, setTags] = useState("")
+  const [Privacy, setPrivacy] = useState(0)
   const [Categories, setCategories] = useState(1)
   const [ThumbnailPath, setThumbnailPath] = useState("")
 
@@ -48,88 +50,120 @@ function ProjectUploadPage(props) {
       setTitle(event.currentTarget.value)
   }
   const handleChangeSubTitle = (event) => {
-    setSubTitle(event.currentTarget.value)
+      setSubTitle(event.currentTarget.value)
   }
   const handleChangeDecsription = (event) => {
       setDescription(event.currentTarget.value)
   }
 
-  const handleChangeStartDate = (event) =>{
-    setStartDate(event.currentTarget.value)
+  const handleChangeStartDate = (d, dateString) =>{
+    setStartDate(dateString)
   }
-  const handleChangeEndDate = (event) =>{
-    setEndDate(event.currentTarget.value)
+  const handleChangeEndDate = (d, dateString) =>{
+    setEndDate(dateString)
   }
+
+  const handleChangeSkills = (event) => {
+    setSkills(event.currentTarget.value)
+  }
+  const handleChangeTags = (event) => {
+    setTags(event.currentTarget.value)
+  }
+
 
   const onSubmit = values => {
     console.log(values);
   };
 
-  const handleChangeOne = (event) => {
-    setPrivacy(event.currentTarget.value)
+  const handleChangePrivacy = (event) => {
+    setPrivacy(event)
   }
 
-  const handleChangeTwo = (event) => {
-      setCategories(event.currentTarget.value)
+  const handleChangeCategory = (event) => {
+     setCategories(event)
   }
 
   return (
     <div className="container">
       <Form onSubmit={onSubmit} className="uploadProject">    
-        <div>
+        <div className="input_wrap">
           <label>Title</label>
           <Input 
           onChange={handleChangeTitle}
           value={title}/>
         </div>
-        <div>
+        <div className="input_wrap">
           <label>Sub Title</label>
           <Input 
             onChange={handleChangeSubTitle}
             value={subTitle}/>
         </div>
-        <div>
+        <div className="input_wrap">
           <label>Date</label>
-          <Row>
+          <Row gutter={24}>
             <Col span={12}>
-            <DatePicker 
+            <DatePicker style={{'width': '100%'}}
               onChange={handleChangeStartDate}
-              value={startDate}/>
+              mode="date"
+              
+              />
             </Col>
             <Col span={12}>
-            <DatePicker 
+            <DatePicker style={{'width': '100%'}}
               onChange={handleChangeEndDate}
-              value={endDate}/>
+              mode="date"
+             
+              />
             </Col>
             </Row>
         </div>
-        <div>
-          <label>Category</label>
-              <Select onChange={handleChangeTwo}>
-                {CategoryOptions.map((item, index) => (
-                  <Option key={index} value={item.value}>{item.label}</Option>
-                ))}
-              </Select>
-        </div>
-        <div>
+        <Row gutter={24}>
+          <Col className="input_wrap" span={12}> 
+            <label>Category</label>
+            <Select onChange={handleChangeCategory} style={{'width' : '100%'}} 
+            labelInValue
+            defaultValue={{ value: 1 }}>
+              {CategoryOptions.map((item, index) => (
+                <Option key={index} value={item.value}>{item.label}</Option>
+              ))}
+            </Select>
+          </Col>
+          <Col className="input_wrap" span={12}> 
+            <label>Privacy</label>
+            <Select 
+            onChange={handleChangePrivacy} 
+            style={{'width' : '100%'}} 
+            labelInValue
+            defaultValue={{ value: 0 }}>
+              {PrivateOptions.map((item, index) => (
+                <Option key={index} value={item.value}>{item.label}</Option>
+              ))}
+            </Select>
+          </Col>
+        </Row>
+        <div className="input_wrap">
           <label>Description</label>
           <TextArea
             onChange={handleChangeDecsription}
             value={Description}>
           </TextArea>
         </div>
+        <div className="input_wrap">
+          <label>Skills</label>
+          <Input
+            onChange={handleChangeSkills}
+            value={Skills}>
+          </Input>
+        </div>
+        <div className="input_wrap">
+          <label>Tags</label>
+          <Input
+            onChange={handleChangeTags}
+            value={Tags}>
+          </Input>
+        </div>
 
-        <Select onChange={handleChangeOne}>
-          {PrivateOptions.map((item, index) => (
-            <Option key={index} value={item.value}>{item.label}</Option>
-          ))}
-        </Select>
-        <br/>
-        <br/>
-
-       
-        <br/>
-        <br/>
+      
 
         <Button type="primary" onClick={onSubmit} size="large" >
           Submit

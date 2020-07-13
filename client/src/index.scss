@@ -40,14 +40,15 @@ input.error {
 .container{
   width:100%;
   margin: 0 auto;
-  max-width:1080px;
+  max-width:1250px;
   padding: 20px 5%;
   box-sizing: border-box;
 }
 
 .uploadProject{
-  .ant-calendar-picker{
-    width:100%;
+  .input_wrap{ 
+    margin-bottom:10px;
+    label{margin-bottom:5px; display:block; font-weight:500}
   }
 }
 
@@ -75,6 +76,7 @@ footer{
     color:#961210;
   }
 }
+
 .ListWrap{
   margin-top:15px;
   margin-bottom:30px;

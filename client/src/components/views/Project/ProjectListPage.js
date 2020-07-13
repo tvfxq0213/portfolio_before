@@ -9,22 +9,28 @@ function ProjectListPage(props) {
   }
   return (
     <div className="container">
-      <Row  gutter={{ xs: 8, sm: 16, md: 24 }}>
-        <Col class="" span={12}>
+      <Row  gutter={24}>
+        <Col className="" span={12}>
           <span className="CategoryTab" onClick={onHandledCategory('')}>All</span>
           <span className="CategoryTab" onClick={onHandledCategory('2')}>회사</span>
           <span className="CategoryTab" onClick={onHandledCategory('1')}>개인</span>
         </Col>
-        <Col span={12} className="text-right ">
+        <Col className="" span={12} className="text-right ">
           <Button href="/projectUpload">Upload</Button>
         </Col>
       </Row>
       <div className="ListWrap">
-        <Row  gutter={{ xs: 8, sm: 16, md: 24 }}>
-          <Col span={6}>
+        <Row  gutter={24}>
+          <Col className="" xs={24} sm={12} md={6}>
             <Item category={1}/>
           </Col>
-          <Col span={6}>
+          <Col className="" xs={24} sm={12} md={6}>
+            <Item category={2}/>
+          </Col>
+          <Col className="" xs={24} sm={12} md={6}>
+            <Item category={1}/>
+          </Col>
+          <Col className="" xs={24} sm={12} md={6}>
             <Item category={2}/>
           </Col>
         </Row>
