@@ -1,4 +1,7 @@
 const mongoose = require('mongoose');
+var autoIncrement = require('mongoose-auto-increment');
+
+
 const Schema = mongoose.Schema
 
 
@@ -7,6 +10,9 @@ const projectSchema = mongoose.Schema({
     writer:{
         type: Schema.Types.ObjectId,
         ref: 'User'
+    },
+    projectId :{
+        type: Number,
     },
     projectTitle:{
         type: String,
@@ -42,8 +48,13 @@ const projectSchema = mongoose.Schema({
     
 }, {timestamp: true})
 
-
+autoIncrement.initialize(mongoose.connection);
+projectSchema.plugin(autoIncrement.plugin, {
+    model:'Project',
+    field: 'projectId', // 
+    startAt: 1, // 1에서 부터
+    increment: 1 // 1씩 증가
+})
 
 const Project = mongoose.model('Project', projectSchema);
-
 module.exports = { Project }

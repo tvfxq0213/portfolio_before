@@ -2,24 +2,31 @@ import React from 'react'
 import {Tag} from 'antd'
 
 function Item(props) {
+  const project = props.Project;
+  const tags = project.tags.split(',');
 
   return (
     <div className="item">
-      <a href="/project/12">
-
-        <span className={props.category==2 ? 'category personal': 'category company'}>{props.category==2 ? '개인프로젝트': '회사프로젝트'}</span>
-        <img className="thumbnail" src="" alt="thumbnail" title="thumbnail"/>
+      <a  href={`/project/${project._id}`}>
+        <span className={project.category == 2 ? 'category personal': 'category company'}>
+          {project.category == 2 ? '개인프로젝트': '회사프로젝트'}
+        </span>
+        <img className="thumbnail" 
+          src={project.thumbnail}
+          alt="thumbnail" title="thumbnail"/>
         <h3>
-          Title
+          {project.projectTitle}
         </h3>
-        <p>subTitle</p>
-        <p className="date">2017.08.07~ 2019.01.28</p>
+        <p>{project.projectSubTitle}</p>
+        <p className="date">{project.startDate} ~ {project.endDate}</p>
         <div className="tag_wrap">
-          <Tag color="geekblue">HTML</Tag> 
-          <Tag color="geekblue">CSS</Tag>          
-          
+        {tags.map((tag, index) => {
+            return <Tag color="geekblue" key={index}>{tag}</Tag>
+          })
+          }
         </div>
       </a>
+      
     </div>
   )
 }

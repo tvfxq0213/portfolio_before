@@ -113,7 +113,7 @@ function ProjectUploadPage(props) {
         privacy: Privacy,
         category: Categories,
         tags: Tags,
-        Thumbnail: FilePath
+        thumbnail: FilePath
 
     }
 
@@ -227,7 +227,7 @@ function ProjectUploadPage(props) {
 
         <div className="input_wrap">
           <label>Thumbnail Image Upload</label>
-          <div style={{display:'flex', justifyContent: 'space-between'}}>
+          <div className="thumbnail_wrap" >
 
           <Dropzone
             onDrop={onDrop}

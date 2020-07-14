@@ -49,6 +49,13 @@ input.error {
   .input_wrap{ 
     margin-bottom:10px;
     label{margin-bottom:5px; display:block; font-weight:500}
+    .thumbnail_wrap{
+      display:flex;
+      justify-content: space-between;
+      img{
+        width:100%; max-width:500px;
+      }
+    }
   }
 }
 
@@ -113,4 +120,17 @@ footer{
 
 @media (max-width: 767px) {
   .container{padding: 0 3%;}
+
+
+.uploadProject{
+  .input_wrap{ 
+   
+    .thumbnail_wrap{
+      flex-direction: row;
+      img{
+        width:100%;
+      }
+    }
+  }
+}
 }

@@ -6,7 +6,7 @@ import Axios from "axios"
 function ProjectListPage(props) {
   
 
-  const [Video, setVideo] = useState([]);
+  const [Project, setProject] = useState([]);
   const [category, setCategory] = useState(0)
 
   useEffect(() => {
@@ -15,7 +15,7 @@ function ProjectListPage(props) {
       .then(response => {
           if(response.data.success){
               console.log(response.data.projects)
-              setVideo(response.data.projects)
+              setProject(response.data.projects)
           }else{
               alert("비디오 가져오기를 실패 했습니다.");
           }
@@ -28,6 +28,15 @@ function ProjectListPage(props) {
     console.log(event.target.category)
    // setCategory(event.target.data["category"])
   }
+
+  const renderProject = Project.map((project, index) =>{
+      return <Col lg={6} md={12} xs={24} key={index}>
+        <Item Project={project}/>
+      
+      </Col>
+  });
+  
+
 
   return (
     <div className="container">
@@ -43,18 +52,7 @@ function ProjectListPage(props) {
       </Row>
       <div className="ListWrap">
         <Row  gutter={24}>
-          <Col className="" xs={24} sm={12} md={6}>
-            <Item category={1}/>
-          </Col>
-          <Col className="" xs={24} sm={12} md={6}>
-            <Item category={2}/>
-          </Col>
-          <Col className="" xs={24} sm={12} md={6}>
-            <Item category={1}/>
-          </Col>
-          <Col className="" xs={24} sm={12} md={6}>
-            <Item category={2}/>
-          </Col>
+          {renderProject}
         </Row>
       </div>
     </div>
