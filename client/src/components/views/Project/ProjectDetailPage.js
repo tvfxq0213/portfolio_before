@@ -48,13 +48,17 @@ function ProjectDetailPage(props) {
 
   return (
     <div className="container">
+      {ProjectDetail.thumbnail &&
       <div className="text-center">
         <img src={`http://localhost:5000/${ProjectDetail.thumbnail}`} alt={ProjectDetail.projectTitle}></img>
       </div>
-      <h2>{ProjectDetail.projectTitle} 
+      }
+      <h2 className="display-flex align-items-center">
         <span className={ProjectDetail.category === 2 ? 'category personal': 'category company'}>
           {ProjectDetail.category === 2 ? '개인프로젝트': '회사프로젝트'}
         </span>
+        {ProjectDetail.projectTitle} 
+        
       </h2>
       <h4>{ProjectDetail.projectSubTitle}</h4>
       <p className="datetime">{ProjectDetail.startDate} ~ {ProjectDetail.endDate}</p>
