@@ -1,31 +1,41 @@
 import React, {useState, useEffect} from 'react'
-import { Form, Input, DatePicker, Col, Row, Select } from 'antd';
+import { Form, Input, DatePicker, Col, Row,  Upload, message , Button, Select } from 'antd';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import Dropzone from 'react-dropzone';
 import { useSelector } from "react-redux";
+import moment from "moment";
+import {Link} from 'react-router-dom';
+
 
 
 import Axios from 'axios';
 
 const {TextArea} = Input;
 const {Option} = Select;
-const layout = {
-  labelCol: { span: 8 },
-  wrapperCol: { span: 16 },
-};
+
 
 const PrivateOptions = [
   { value: 0, label: 'Private' },
   { value: 1, label: 'Public' }
 ]
-const dateFormat = 'YYYY-MM-DD';
+
 const CategoryOptions = [
   { value: 1, label: "회사 프로젝트" },
   { value: 2, label: "개인 프로젝트" },
 ]
-function ProjectUploadPage(props) {
-  const user = useSelector(state => state.user);
+const dateFormat = 'YYYY-MM-DD';
 
+
+
+function ProjectUpdatePage(props) {
+  const user = useSelector(state => state.user);
+  const projectId = props.match.params.projectId
+  const variable = {
+    projectId
+  }
+
+  const [ProjectDetail, setProjectDetail] = useState([]);
+ 
   const [title, setTitle] = useState("");
   const [subTitle, setSubTitle] = useState("");
   const [Description, setDescription] = useState("");
@@ -36,6 +46,36 @@ function ProjectUploadPage(props) {
   const [Privacy, setPrivacy] = useState(0)
   const [Categories, setCategories] = useState(1)
   const [FilePath, setFilePath] = useState("")
+
+
+  useEffect(()=>{
+    Axios.post('/api/project/getProjectDetail', variable)
+    .then(response => {
+        if (response.data.success) {
+           const projectDetail = response.data.project;
+            console.log(projectDetail);
+            setProjectDetail(projectDetail)
+            setTitle(projectDetail.projectTitle);
+            setSubTitle(projectDetail.projectSubTitle);
+            setDescription(projectDetail.description);
+            setStartDate(moment(projectDetail.startDate,dateFormat));
+            setEndDate(moment(projectDetail.endDate, dateFormat));
+
+        
+            setSkills(projectDetail.skills)
+            setTags(projectDetail.tags)
+
+
+
+            if(response.data.project.writer._id === localStorage.getItem('userId')){ 
+              // 작성자와 로그인한 userId가 같아야 삭제 버튼이 나타남
+            }
+
+        } else {
+            alert('Failed to get video Info')
+        }
+    })
+  }, [projectId]) //  props.match.params.videoId가 바뀔때만 재구독한다. 
 
 
   const handleChangeTitle = (event) => {
@@ -49,10 +89,10 @@ function ProjectUploadPage(props) {
   }
 
   const handleChangeStartDate = (d, dateString) =>{
-    setStartDate(dateString)
+    setStartDate(d)
   }
   const handleChangeEndDate = (d, dateString) =>{
-    setEndDate(dateString)
+    setEndDate(d)
   }
 
   const handleChangeSkills = (event) => {
@@ -167,14 +207,16 @@ function ProjectUploadPage(props) {
             <DatePicker style={{'width': '100%'}}
               onChange={handleChangeStartDate}
               mode="date"
-              
+              value={startDate}
               />
             </Col>
             <Col span={12}>
             <DatePicker style={{'width': '100%'}}
               onChange={handleChangeEndDate}
               mode="date"
-             
+              value={endDate}
+
+
               />
             </Col>
             </Row>
@@ -185,6 +227,7 @@ function ProjectUploadPage(props) {
             <Select onChange={handleChangeCategory} style={{'width' : '100%'}} 
             labelInValue
             format={dateFormat}
+
             defaultValue={{ value: 1 }}>
               {CategoryOptions.map((item, index) => (
                 <Option key={index} value={item.value}>{item.label}</Option>
@@ -198,6 +241,7 @@ function ProjectUploadPage(props) {
             style={{'width' : '100%'}} 
             labelInValue
             format={dateFormat}
+
             defaultValue={{ value: 0 }}>
               {PrivateOptions.map((item, index) => (
                 <Option key={index} value={item.value}>{item.label}</Option>
@@ -254,8 +298,9 @@ function ProjectUploadPage(props) {
 
       
         <div className="btn_wrap my-50 text-center">
-          <button type="button" onClick={onSubmit} className="btn blue">
-            Submit
+          <Link to="/project" className="btn ">List</Link>
+          <button type="button" onClick={onSubmit} className="btn green ml-5" >
+            Update
           </button>
         </div>
 
@@ -264,4 +309,4 @@ function ProjectUploadPage(props) {
   )
 }
 
-export default ProjectUploadPage
+export default ProjectUpdatePage

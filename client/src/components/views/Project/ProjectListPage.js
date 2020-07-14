@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react'
-import {Button, Select, Tag, Col, Row} from 'antd';
+import { Col, Row} from 'antd';
+import {Link} from 'react-router-dom';
 import Item from "./Sections/Item.js";
 import Axios from "axios"
 
@@ -47,7 +48,7 @@ function ProjectListPage(props) {
           <span className="CategoryTab" category="2" onClick={onHandledCategory}>개인</span>
         </Col>
         <Col className="" span={12} className="text-right ">
-          <Button href="/projectUpload">Upload</Button>
+          <Link to="/projectUpload" className="btn">Upload</Link>
         </Col>
       </Row>
       <div className="ListWrap">

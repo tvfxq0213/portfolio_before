@@ -90,12 +90,14 @@ router.post("/deleteProject", (req, res) => {
 
 
 router.post("/updateProject", (req, res) => {
+  const project = req.body;
 
-  Project.findOneAndUpdate({"_id":req.body.videoId})
-  .exec((err, result)=>{
-    if(err) return res.status(400).send(err)
-    return res.status(200).json({success:true})
-  })
+  Project.findOneAndUpdate({"_id":req.body.videoId}, project,(err, doc) => {
+    if (err) return res.json({ success: false, err });
+    return res.status(200).send({
+        success: true
+    });
+  });
 
 });
 

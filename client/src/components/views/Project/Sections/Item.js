@@ -1,5 +1,7 @@
 import React from 'react'
 import {Tag} from 'antd'
+import {Link} from 'react-router-dom';
+
 
 function Item(props) {
   const project = props.Project;
@@ -7,7 +9,7 @@ function Item(props) {
 
   return (
     <div className="item">
-      <a  href={`/project/${project._id}`}>
+      <Link to={`/project/${project._id}`}>
         <span className={project.category == 2 ? 'category personal': 'category company'}>
           {project.category == 2 ? '개인프로젝트': '회사프로젝트'}
         </span>
@@ -25,7 +27,7 @@ function Item(props) {
           })
           }
         </div>
-      </a>
+      </Link>
       
     </div>
   )

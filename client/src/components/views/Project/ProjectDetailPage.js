@@ -2,7 +2,9 @@ import React, {useEffect, useState} from 'react'
 import { Row, Col , Tag } from 'antd';
 import Axios from 'axios';
 import DeleteBtn from './Sections/deleteBtn.js';
-import UpdateBtn from './Sections/updateBtn.js';
+import moment from 'moment'
+import {Link} from 'react-router-dom';
+
 
 function ProjectDetailPage(props) {
 
@@ -66,9 +68,13 @@ function ProjectDetailPage(props) {
 
 
       <div className="btn_wrap my-50 text-right">
+      { DeleteBtnShow &&
         <DeleteBtn projectId={projectId} userId={localStorage.getItem('userId')}></DeleteBtn>
-        <UpdateBtn projectId={projectId} userId={localStorage.getItem('userId')}></UpdateBtn>
-        <a href="/project" className="btn ml-5">List</a>
+      }
+      { UpdateBtnShow &&
+        <Link to={`/project/update/${projectId}`} className="btn blue ml-5">Update</Link>
+      }
+        <Link to="/project" className="btn ml-5">List</Link>
 
       </div>
     </div>
