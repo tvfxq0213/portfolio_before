@@ -1,3 +1,4 @@
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
@@ -44,6 +45,15 @@ input.error {
   padding: 20px 5%;
   box-sizing: border-box;
 }
+.my-50{
+  margin: 50px 0;
+}
+.ml-5{
+  margin-left:5px;
+}
+.mr-5{
+  margin-right:5px;
+}
 
 .uploadProject{
   .input_wrap{ 
@@ -59,6 +69,96 @@ input.error {
   }
 }
 
+.btn{
+  line-height: 1.5715;
+    position: relative;
+    font-weight: 500;
+    display:inline-block;
+    white-space: nowrap;
+    text-align: center;
+    background-image: none;
+    border: 1px solid transparent;
+    -webkit-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
+    cursor: pointer;
+    -webkit-transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    height: 32px;
+    padding: 4px 15px;
+    font-size: 14px;
+    border-radius: 2px;
+    color: rgba(0, 0, 0, 0.65);
+    background: #fff;
+    border-color: #d9d9d9;
+    border-radius: 4px;
+  &.red{
+    border-color:transparent ;
+    background:#f5222d;
+    color:#fff;
+    &:hover,
+    &:focus{
+      color:#fff;
+      border-color:transparent ;
+      background: #cf1322;
+    }
+  }
+  &.blue{
+    color:#fff;
+    border-color:transparent ;
+    background:#1890ff;
+    &:hover,
+    &:focus{
+      border-color:transparent ;
+      background: #096dd9;
+    }
+  }
+  &.cyan{
+    color:#fff;
+    border-color:transparent ;
+    background:#13c2c2;
+    &:hover,
+    &:focus{
+      border-color:transparent ;
+      background: #08979c
+    }
+  }
+  &.green{
+    color:#fff;
+    border-color:transparent ;
+    background:#52c41a;
+    &:hover,
+    &:focus{
+      border-color:transparent ;
+      background: #389e0d;
+    }
+  }
+  &.lime{
+    color:#fff;
+    border-color:transparent ;
+    background:#a0d911;
+    &:hover,
+    &:focus{
+      border-color:transparent ;
+      background: #7cb305;
+    }
+  }
+  &.yellow{
+    color:#fff;
+    border-color:transparent ;
+    background:#fadb14;
+    &:hover,
+    &:focus{
+      border-color:transparent ;
+      background: #d4b106
+    }
+  }
+}
 .text-center{text-align:center}
 .text-right{text-align:right}
 .text-left{text-align:left}
@@ -83,7 +183,18 @@ footer{
     color:#961210;
   }
 }
-
+.category{
+  
+  padding:3px 5px;
+  color:#fff;
+  font-size:10px;
+  &.personal{
+    background:#961210;
+  }
+  &.company{
+    background:#000080;
+  }
+}
 .ListWrap{
   margin-top:15px;
   margin-bottom:30px;
@@ -102,19 +213,11 @@ footer{
       opacity:0.8
     }
     .category{
-      position:absolute;
-      top:0;
-      left:0;
-      padding:3px 5px;
-      color:#fff;
-      font-size:10px;
-      &.personal{
-        background:#961210;
-      }
-      &.company{
-        background:#000080;
-      }
+        position:absolute;
+        top:0;
+        left:0;
     }
+    
   }
 }
 

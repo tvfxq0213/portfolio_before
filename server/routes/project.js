@@ -67,7 +67,7 @@ router.get('/getProjects', (req,res)=>{
 router.post('/getProjectDetail', (req,res)=>{
 
   //비디오를 DB에서 가져와서 클라이언트에 보낸다.  
-  Project.findOne({ "_id" : req.body.videoId })
+  Project.findOne({ "_id" : req.body.projectId })
   .populate('writer')
   .exec((err, project) => {
       if(err) return res.status(400).send(err);
