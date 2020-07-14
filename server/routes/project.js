@@ -80,12 +80,24 @@ router.post('/getProjectDetail', (req,res)=>{
 
 router.post("/deleteProject", (req, res) => {
 
-  Project.findOneAndDelete({"_id":req.body.videoId})
+  Project.findOneAndDelete({"_id":req.body.projectId})
   .exec((err, result)=>{
     if(err) return res.status(400).send(err)
     return res.status(200).json({success:true})
   })
 
 });
+
+
+router.post("/updateProject", (req, res) => {
+
+  Project.findOneAndUpdate({"_id":req.body.videoId})
+  .exec((err, result)=>{
+    if(err) return res.status(400).send(err)
+    return res.status(200).json({success:true})
+  })
+
+});
+
 
 module.exports = router;

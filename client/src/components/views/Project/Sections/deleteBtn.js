@@ -1,5 +1,6 @@
 import React from 'react'
 import Axios from 'axios'
+import { withRouter} from 'react-router-dom';
 import { Button } from 'antd';
 import 'antd/dist/antd.css';
 
@@ -7,14 +8,15 @@ import 'antd/dist/antd.css';
 function deleteBtn(props) {
 
   const variable = {
-    videoId: props.videoId
+    projectId: props.projectId
   }
-  const DeleteVideo = (props) => {
+  const DeleteVideo = () => {
     Axios.post('/api/project/deleteProject', variable)
     .then(response => {
       if( response.data.success) {
+        console.log(response.data)
         alert('프로젝트가 삭제되었습니다.')
-        props.history.push('/')
+        props.history.push('/project')
       }else{
         alert('프로젝트를 삭제하는데 실패했습니다.')
       }
@@ -33,4 +35,4 @@ function deleteBtn(props) {
   }
 }
 
-export default deleteBtn
+export default withRouter(deleteBtn)

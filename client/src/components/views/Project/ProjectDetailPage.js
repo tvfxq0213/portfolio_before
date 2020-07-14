@@ -46,7 +46,7 @@ function ProjectDetailPage(props) {
 
   return (
     <div className="container">
-      <div class="text-center">
+      <div className="text-center">
         <img src={`http://localhost:5000/${ProjectDetail.thumbnail}`} alt={ProjectDetail.projectTitle}></img>
       </div>
       <h2>{ProjectDetail.projectTitle} 
@@ -57,7 +57,7 @@ function ProjectDetailPage(props) {
       <h4>{ProjectDetail.projectSubTitle}</h4>
       <p className="datetime">{ProjectDetail.startDate} ~ {ProjectDetail.endDate}</p>
       <p className="skills">{ProjectDetail.skills}</p>
-      <div class="contents">
+      <div className="contents">
         {ProjectDetail.description}  
       </div>  
       <p> 
@@ -65,7 +65,7 @@ function ProjectDetailPage(props) {
       </p>
 
 
-      <div class="btn_wrap my-50 text-right">
+      <div className="btn_wrap my-50 text-right">
         <DeleteBtn projectId={projectId} userId={localStorage.getItem('userId')}></DeleteBtn>
         <UpdateBtn projectId={projectId} userId={localStorage.getItem('userId')}></UpdateBtn>
         <a href="/project" className="btn ml-5">List</a>
