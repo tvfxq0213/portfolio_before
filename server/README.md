@@ -1,16 +1,18 @@
-Hello, My Friends  
-Thank you for Having interest in this repository ! 
-
-To use this application, 
-
-1. make dev.js file inside config folder 
-2. put mongoDB info into dev.js file 
-3. Type  " npm install " inside the root directory  ( Download Server Dependencies ) 
-4. Type " npm install " inside the client directory ( Download Front-end Dependencies )
 
 
-If you have problem, feel free to ask me ^^ 
+## 사용방법
 
- You can watch the tutorial for this app.
-
-https://www.youtube.com/channel/UCFyXA9x8lpL3EYWeYhj4C4Q?view_as=subscriber
+1. servie/config 폴더 안에 dev.js파일을 만든다.
+2. dev.js 파일안에 mongoDB 정보를 넣는다
+ex)
+<pre>
+  <code>
+  module.exports = {
+  mongoURI: 'mongodb+srv://DBuser:dbpassword@boilerplate-lsskr.mongodb.net/DBprojectName'
+  }
+</code>
+</pre>
+3. cd ./server 로 이동하여 npm install (Backend setting)
+4. cd ./client 로 이동하여 npm install (Frontend setting)
+5. root 에서 npm install
+6. npm run dev

@@ -226,6 +226,7 @@ footer{
   .item{
     position:relative;
     width:100%;
+    margin-bottom:20px;
     .thumbnail{
       width:100%;
       min-height:200px;
@@ -253,6 +254,13 @@ footer{
     margin: 0 auto;
     width:100%;
     max-width:300px;
+  }
+  .contents{
+    line-height:1.5;
+    p{margin-bottom:0;}
+  }
+  .tags_wrap{
+    margin: 20px 0;
   }
 }
 @media (max-width: 767px) {

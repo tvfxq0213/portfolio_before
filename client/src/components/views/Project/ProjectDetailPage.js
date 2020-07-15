@@ -65,7 +65,7 @@ function ProjectDetailPage(props) {
       <p className="skills">{ProjectDetail.skills}</p>
       <div className="contents" dangerouslySetInnerHTML={ {__html: ProjectDetail.description}}>
       </div>  
-      <p> 
+      <p className="tags_wrap"> 
         {renderTags}
       </p>
 
