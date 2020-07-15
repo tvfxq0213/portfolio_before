@@ -35,7 +35,6 @@ function ProjectUpdatePage(props) {
   }
 
   const [ProjectDetail, setProjectDetail] = useState([]);
- 
   const [title, setTitle] = useState("");
   const [subTitle, setSubTitle] = useState("");
   const [Description, setDescription] = useState("");
@@ -53,17 +52,15 @@ function ProjectUpdatePage(props) {
     .then(response => {
         if (response.data.success) {
            const projectDetail = response.data.project;
-            console.log(projectDetail);
             setProjectDetail(projectDetail)
             setTitle(projectDetail.projectTitle);
             setSubTitle(projectDetail.projectSubTitle);
             setDescription(projectDetail.description);
             setStartDate(moment(projectDetail.startDate,dateFormat));
             setEndDate(moment(projectDetail.endDate, dateFormat));
-
-        
             setSkills(projectDetail.skills)
             setTags(projectDetail.tags)
+            setFilePath(projectDetail.thumbnail);
 
 
 
@@ -89,10 +86,10 @@ function ProjectUpdatePage(props) {
   }
 
   const handleChangeStartDate = (d, dateString) =>{
-    setStartDate(d)
+    setStartDate(moment(d,dateFormat))
   }
   const handleChangeEndDate = (d, dateString) =>{
-    setEndDate(d)
+    setEndDate(moment(d,dateFormat))
   }
 
   const handleChangeSkills = (event) => {
@@ -143,23 +140,27 @@ function ProjectUpdatePage(props) {
   }
 
     const variables = {
-        writer: user.userData._id,
-        projectTitle: title,
-        projectSubTitle: subTitle,
-        description: Description,
-        skills: Skills,
-        startDate: startDate,
-        endDate: endDate,
-        privacy: Privacy,
-        category: Categories,
-        tags: Tags,
-        thumbnail: FilePath
+        projectId,
+        data :{
+          writer: user.userData._id,
+          projectTitle: title,
+          projectSubTitle: subTitle,
+          description: Description,
+          skills: Skills,
+          startDate: startDate,
+          endDate: endDate,
+          privacy: Privacy,
+          category: Categories,
+          tags: Tags,
+          thumbnail: FilePath
+        }
 
     }
 
     console.log(variables);
 
-    Axios.post('/api/project/uploadProject', variables)
+    
+    Axios.post('/api/project/updateProject', variables)
           .then(response => {
             console.log(response);
               if (response.data.success) {
@@ -167,12 +168,12 @@ function ProjectUpdatePage(props) {
                   setTimeout(()=> {
                     props.history.push('/project')
 
-                  },3000)
+                  },1000)
               } else {
-                  alert('Failed to upload video')
+                  alert('프로젝트업로드를 실패하였습니다. ')
               }
           })
-
+      
   };
 
   const handleChangePrivacy = (event) => {

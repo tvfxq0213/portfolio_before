@@ -40,10 +40,7 @@ router.post('/uploadfiles', (req,res)=>{
 router.post('/uploadProject', (req,res)=>{
 
   //비디오를 정보들을 저장한다.
-
   const project = new Project(req.body);
-  console.log(req.body)
-
   project.save((err, doc) => {
     if(err) return res.json({success: false, err})
     res.status(200).json({success: true})
@@ -90,16 +87,28 @@ router.post("/deleteProject", (req, res) => {
 
 
 router.post("/updateProject", (req, res) => {
-  const project = req.body;
+  
+  console.log("=======updateProject============")
+  const filter = {'_id':req.body.projectId}
 
-  Project.findOneAndUpdate({"_id":req.body.videoId}, project,(err, doc) => {
+  const project = req.body.data;
+
+
+
+  Project.findOneAndUpdate(filter, project, {
+    new: true,
+    upsert: true,
+    rawResult: true
+  })
+  .exec((err, project) => {
     if (err) return res.json({ success: false, err });
     return res.status(200).send({
         success: true
     });
+
   });
+  
 
 });
-
 
 module.exports = router;

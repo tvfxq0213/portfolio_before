@@ -61,7 +61,7 @@ function ProjectDetailPage(props) {
         
       </h2>
       <h4>{ProjectDetail.projectSubTitle}</h4>
-      <p className="datetime">{ProjectDetail.startDate} ~ {ProjectDetail.endDate}</p>
+      <p className="datetime">{moment(ProjectDetail.startDate).format('YYYY-MM-DD')} ~ {moment(ProjectDetail.endDate).format('YYYY-MM-DD')}</p>
       <p className="skills">{ProjectDetail.skills}</p>
       <div className="contents">
         {ProjectDetail.description}  

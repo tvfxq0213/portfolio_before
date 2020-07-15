@@ -105,7 +105,7 @@ function LoginPage(props) {
                   <div className="input-feedback">{errors.email}</div>
                 )}
               </Form.Item>
-              <p class="people semibold" >1인
+              <p className="people semibold" >1인
 										사용</p>
               <Form.Item required>
                 <Input
