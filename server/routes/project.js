@@ -51,13 +51,24 @@ router.post('/uploadProject', (req,res)=>{
 router.get('/getProjects', (req,res)=>{
 
   //비디오를 DB에서 가져와서 클라이언트에 보낸다. 
+  console.log(req.query)
 
-  Project.find()
-  .populate('writer')
-  .exec((err, projects )=>{
-    if(err) return res.status(400).send(err)
-    res.status(200).json({success: true, projects})
-  })
+  if(req.query.category == 0){
+    Project.find()
+    .populate('writer')
+    .exec((err, projects )=>{
+      if(err) return res.status(400).send(err)
+      res.status(200).json({success: true, projects})
+    })
+  }else{
+    const category = req.query.category
+    Project.find({category})
+    .populate('writer')
+    .exec((err, projects )=>{
+      if(err) return res.status(400).send(err)
+      res.status(200).json({success: true, projects})
+    })
+  }
 
 });
 

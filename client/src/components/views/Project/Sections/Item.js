@@ -2,6 +2,7 @@ import React from 'react'
 import {Tag} from 'antd'
 import {Link} from 'react-router-dom';
 import moment from 'moment';
+import { urlencoded } from 'body-parser';
 
 
 function Item(props) {
@@ -15,9 +16,8 @@ function Item(props) {
         <span className={project.category == 2 ? 'category personal': 'category company'}>
           {project.category == 2 ? '개인프로젝트': '회사프로젝트'}
         </span>
-        <img className="thumbnail" 
-          src={`http://localhost:5000/${project.thumbnail}`}
-          alt="thumbnail" title="thumbnail"/>
+  
+        <img className="thumbnail" src={`http://localhost:5000/${project.thumbnail}`} ></img>
         <h3>
           {project.projectTitle}
         </h3>

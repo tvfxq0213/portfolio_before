@@ -3,11 +3,10 @@ import { Form, Input, DatePicker, Col, Row, Select } from 'antd';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import Dropzone from 'react-dropzone';
 import { useSelector } from "react-redux";
-
-
 import Axios from 'axios';
+import ReactQuill from 'react-quill'; // ES6
+import 'react-quill/dist/quill.snow.css'; // ES6
 
-const {TextArea} = Input;
 const {Option} = Select;
 const layout = {
   labelCol: { span: 8 },
@@ -44,8 +43,9 @@ function ProjectUploadPage(props) {
   const handleChangeSubTitle = (event) => {
       setSubTitle(event.currentTarget.value)
   }
-  const handleChangeDecsription = (event) => {
-      setDescription(event.currentTarget.value)
+ 
+  const handleChangeDecsription = (value) => {
+    setDescription(value)
   }
 
   const handleChangeStartDate = (d, dateString) =>{
@@ -207,10 +207,8 @@ function ProjectUploadPage(props) {
         </Row>
         <div className="input_wrap">
           <label>Description</label>
-          <TextArea
-            onChange={handleChangeDecsription}
-            value={Description}>
-          </TextArea>
+          <ReactQuill value={Description}
+          onChange={handleChangeDecsription} />
         </div>
         <div className="input_wrap">
           <label>Skills</label>

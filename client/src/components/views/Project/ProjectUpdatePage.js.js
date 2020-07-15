@@ -5,7 +5,8 @@ import Dropzone from 'react-dropzone';
 import { useSelector } from "react-redux";
 import moment from "moment";
 import {Link} from 'react-router-dom';
-
+import ReactQuill from 'react-quill'; // ES6
+import 'react-quill/dist/quill.snow.css'; // ES6
 
 
 import Axios from 'axios';
@@ -81,10 +82,9 @@ function ProjectUpdatePage(props) {
   const handleChangeSubTitle = (event) => {
       setSubTitle(event.currentTarget.value)
   }
-  const handleChangeDecsription = (event) => {
-      setDescription(event.currentTarget.value)
+  const handleChangeDecsription = (value) => {
+    setDescription(value)
   }
-
   const handleChangeStartDate = (d, dateString) =>{
     setStartDate(moment(d,dateFormat))
   }
@@ -252,10 +252,8 @@ function ProjectUpdatePage(props) {
         </Row>
         <div className="input_wrap">
           <label>Description</label>
-          <TextArea
-            onChange={handleChangeDecsription}
-            value={Description}>
-          </TextArea>
+          <ReactQuill value={Description}
+          onChange={handleChangeDecsription} />
         </div>
         <div className="input_wrap">
           <label>Skills</label>

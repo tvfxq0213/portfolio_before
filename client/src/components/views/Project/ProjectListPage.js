@@ -11,28 +11,31 @@ function ProjectListPage(props) {
 
   useEffect(() => {
 
-      Axios.get('/api/project/getProjects')
+      Axios.get('/api/project/getProjects', {
+        params: {
+          category
+        }
+      })
       .then(response => {
           if(response.data.success){
               console.log(response.data.projects)
+              console.log(category)
               setProject(response.data.projects)
           }else{
               alert("비디오 가져오기를 실패 했습니다.");
           }
       })
      
-  }, [])
+  }, [category])
 
-  const onHandledCategory = (event) =>{
-    console.log(event)
-    console.log(event.target.category)
-   // setCategory(event.target.data["category"])
+  function onHandledCategory(event){
+    console.log(event.target.dataset.category);
+    setCategory(event.target.dataset.category)
   }
 
   const renderProject = Project.map((project, index) =>{
       return <Col lg={6} md={12} xs={24} key={index}>
         <Item Project={project}/>
-      
       </Col>
   });
   
@@ -42,9 +45,9 @@ function ProjectListPage(props) {
     <div className="container">
       <Row  gutter={24}>
         <Col className="" span={12}>
-          <span className="CategoryTab" category="0" onClick={onHandledCategory}>All</span>
-          <span className="CategoryTab" category="1" onClick={onHandledCategory}>회사</span>
-          <span className="CategoryTab" category="2" onClick={onHandledCategory}>개인</span>
+          <span className="CategoryTab" data-category="0" onClick={onHandledCategory}>All</span>
+          <span className="CategoryTab" data-category="1" onClick={onHandledCategory}>회사</span>
+          <span className="CategoryTab" data-category="2" onClick={onHandledCategory}>개인</span>
         </Col>
         <Col className="" span={12} className="text-right ">
           <Link to="/projectUpload" className="btn">Upload</Link>

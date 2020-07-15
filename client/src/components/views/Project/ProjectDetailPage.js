@@ -47,7 +47,7 @@ function ProjectDetailPage(props) {
   
 
   return (
-    <div className="container">
+    <div className="container DetailPageWrap">
       {ProjectDetail.thumbnail &&
       <div className="text-center">
         <img src={`http://localhost:5000/${ProjectDetail.thumbnail}`} alt={ProjectDetail.projectTitle}></img>
@@ -63,8 +63,7 @@ function ProjectDetailPage(props) {
       <h4>{ProjectDetail.projectSubTitle}</h4>
       <p className="datetime">{moment(ProjectDetail.startDate).format('YYYY-MM-DD')} ~ {moment(ProjectDetail.endDate).format('YYYY-MM-DD')}</p>
       <p className="skills">{ProjectDetail.skills}</p>
-      <div className="contents">
-        {ProjectDetail.description}  
+      <div className="contents" dangerouslySetInnerHTML={ {__html: ProjectDetail.description}}>
       </div>  
       <p> 
         {renderTags}
