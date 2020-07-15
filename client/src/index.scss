@@ -1,5 +1,34 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
 
+$white :  #ffffff;
+$primary_color1 : #961210;
+/* 밝기 */
+$primary1_lighten10: #c41815;
+$primary1_lighten20: #e82724;
+$primary1_lighten30: #ed5552;
+$primary1_lighten40: #f18280;
+$primary1_lighten50: #f6b0af;
+$primary1_lighten60: #fbdddd;
+
+$primary1_darken10: #680c0b;
+$primary1_darken20: #3a0706;
+$primary1_darken30: #0c0101;
+
+/* 채도*/
+$primary1_saturate10: #9e0a08;
+
+$primary1_desaturate10 : #8e1a18;
+$primary1_desaturate20 : #852221;
+$primary1_desaturate30 : #7d2a29;
+$primary1_desaturate40 : #753231;
+$primary1_desaturate50 : #6c3a39;
+$primary1_desaturate60 : #644242;
+$primary1_desaturate70 : #5c4a4a;
+$primary1_desaturate80 : #545252;
+
+$primary_color2 : #000080;
+
+
 body {
   margin: 0;
   font-family: 'Noto Sans KR', sans-serif;
@@ -15,8 +44,8 @@ body {
   font-family: 'Noto Sans KR', sans-serif;
   font-size: 14px;
   line-height: 1.5;
-  color: #434343;
-  background-color: #fff;
+  color: $primary1_desaturate80;
+  background-color: $white;
 }
 
 .app {
@@ -28,12 +57,12 @@ body {
 }
 
 input.error {
-  border-color: red;
+  border-color: $primary1_lighten20;
 }
 
 
 .input-feedback {
-  color: red;
+  color: $primary1_lighten20;
   height: 5px;
   margin-top: -12px;
 }
@@ -65,32 +94,6 @@ input.error {
         width:100%; max-width:500px;
       }
     }
-    .DraftEditor-root{
-      min-height:100px;
-      -webkit-box-sizing: border-box;
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-variant: tabular-nums;
-      list-style: none;
-      -webkit-font-feature-settings: 'tnum';
-      font-feature-settings: 'tnum', "tnum";
-      position: relative;
-      display: inline-block;
-      width: 100%;
-      min-width: 0;
-      padding: 4px 11px;
-      color: rgba(0, 0, 0, 0.65);
-      font-size: 14px;
-      line-height: 1.5715;
-      background-color: #fff;
-      background-image: none;
-      border: 1px solid #d9d9d9;
-      border-radius: 2px;
-      -webkit-transition: all 0.3s;
-      transition: all 0.3s;
-
-    }
   }
 }
 
@@ -119,22 +122,67 @@ input.error {
     font-size: 14px;
     border-radius: 2px;
     color: rgba(0, 0, 0, 0.65);
-    background: #fff;
+    background: $white;
     border-color: #d9d9d9;
     border-radius: 4px;
+   
   &.red{
     border-color:transparent ;
     background:#f5222d;
-    color:#fff;
+    color:$white;
     &:hover,
     &:focus{
-      color:#fff;
+      color:$white;
       border-color:transparent ;
       background: #cf1322;
     }
   }
+  &.volcano{
+    border-color:transparent;
+    background:#fa541c;
+    color:$white;
+    &:hover,
+    &:focus{
+      background:#d4380d;
+      border-color:transparent ;
+      color:$white
+    }
+  }
+  &.orange{
+    border-color:transparent;
+    background:#fa8c16;
+    color:$white;
+    &:hover,
+    &:focus{
+      background:#d46b08;
+      color:$white;
+      border-color:transparent;
+    }
+  }
+  &.gold{
+    color:$white;
+    background:#faad14;
+    border-color:transparent;
+    &:hover,
+    &:focus{
+      color:$white;
+      background:#d48806;
+      border-color:transparent;
+    }
+  }
+  &.greekblue{
+    color:$white;
+    background:#2f54eb;
+    border-color:transparent;
+    &:hover,
+    &:focus{
+      color:$white;
+      background:#1d39c4;
+      border-color:transparent;
+    }
+  }
   &.blue{
-    color:#fff;
+    color:$white;
     border-color:transparent ;
     background:#1890ff;
     &:hover,
@@ -144,7 +192,7 @@ input.error {
     }
   }
   &.cyan{
-    color:#fff;
+    color:$white;
     border-color:transparent ;
     background:#13c2c2;
     &:hover,
@@ -154,7 +202,7 @@ input.error {
     }
   }
   &.green{
-    color:#fff;
+    color:$white;
     border-color:transparent ;
     background:#52c41a;
     &:hover,
@@ -164,7 +212,7 @@ input.error {
     }
   }
   &.lime{
-    color:#fff;
+    color:$white;
     border-color:transparent ;
     background:#a0d911;
     &:hover,
@@ -174,13 +222,35 @@ input.error {
     }
   }
   &.yellow{
-    color:#fff;
+    color:$white;
     border-color:transparent ;
     background:#fadb14;
     &:hover,
     &:focus{
       border-color:transparent ;
       background: #d4b106
+    }
+  }
+  &.purple{
+    color:$white;
+    background:#722ed1;
+    border-color:transparent;
+    &:hover,
+    &:focus{
+      color:$white;
+      background:#531dab;
+      border-color:transparent;
+    }
+  }
+  &.magenta{
+    color:$white;
+    background:#eb2f96;
+    border-color:transparent;
+    &:hover,
+    &:focus{
+      color:$white;
+      background:#c41d7f;
+      border-color:transparent;
     }
   }
 }
@@ -205,19 +275,19 @@ footer{
 
   cursor:pointer;
   &:hover{
-    color:#961210;
+    color:$primary_color1;
   }
 }
 .category{
   padding:3px 5px;
-  color:#fff;
+  color:$white;
   font-size:10px;
   margin-right:5px;
   &.personal{
-    background:#961210;
+    background:$primary_color1;
   }
   &.company{
-    background:#000080;
+    background:$primary_color2;
   }
 }
 .ListWrap{
@@ -233,10 +303,10 @@ footer{
       display:block;
       margin:0 auto;
       height:auto;
-      border:1px solid #444444;
+      border:1px solid $primary1_desaturate80;
     }
     h3{margin-top:5px;}
-    p{font-size:12px; color: #434343;}
+    p{font-size:12px; color: $primary1_desaturate80;}
     p.date{
       opacity:0.8
     }
