@@ -1,63 +1,85 @@
 import React, {useState, useEffect} from 'react'
-import { Form, Input, DatePicker, Col, Row, Select } from 'antd';
+import { Form, Input, DatePicker, Col, Row,  Upload, message , Button, Select } from 'antd';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import Dropzone from 'react-dropzone';
 import { useSelector } from "react-redux";
-import Axios from 'axios';
+import moment from "moment";
+import {Link} from 'react-router-dom';
 import ReactQuill from 'react-quill'; // ES6
 import 'react-quill/dist/quill.snow.css'; // ES6
 
+
+import Axios from 'axios';
+
+const {TextArea} = Input;
 const {Option} = Select;
-const layout = {
-  labelCol: { span: 8 },
-  wrapperCol: { span: 16 },
-};
+
 
 const PrivateOptions = [
   { value: 0, label: 'Private' },
   { value: 1, label: 'Public' }
 ]
-const dateFormat = 'YYYY-MM-DD';
+
 const CategoryOptions = [
   { value: 1, label: "회사 프로젝트" },
   { value: 2, label: "개인 프로젝트" },
 ]
-function ProjectUploadPage(props) {
-  const user = useSelector(state => state.user);
 
+
+
+function ProjectUpdatePage(props) {
+  const user = useSelector(state => state.user);
+  const projectId = props.match.params.projectId
+  const variable = {
+    projectId
+  }
+
+  const [ProjectDetail, setProjectDetail] = useState([]);
   const [title, setTitle] = useState("");
-  const [subTitle, setSubTitle] = useState("");
   const [Description, setDescription] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-  const [Skills, setSkills] = useState("")
+
   const [Tags, setTags] = useState("")
   const [Privacy, setPrivacy] = useState(0)
   const [Categories, setCategories] = useState(1)
   const [FilePath, setFilePath] = useState("")
 
 
+  useEffect(()=>{
+    Axios.post('/api/project/getProjectDetail', variable)
+    .then(response => {
+        if (response.data.success) {
+           const projectDetail = response.data.project;
+            setProjectDetail(projectDetail)
+            setTitle(projectDetail.projectTitle);
+            setSubTitle(projectDetail.projectSubTitle);
+            setDescription(projectDetail.description);
+            setStartDate(moment(projectDetail.startDate,dateFormat));
+            setEndDate(moment(projectDetail.endDate, dateFormat));
+            setSkills(projectDetail.skills)
+            setTags(projectDetail.tags)
+            setFilePath(projectDetail.thumbnail);
+
+
+
+            if(response.data.project.writer._id === localStorage.getItem('userId')){ 
+              // 작성자와 로그인한 userId가 같아야 삭제 버튼이 나타남
+            }
+
+        } else {
+            alert('Failed to get video Info')
+        }
+    })
+  }, [projectId]) //  props.match.params.videoId가 바뀔때만 재구독한다. 
+
+
   const handleChangeTitle = (event) => {
       setTitle(event.currentTarget.value)
   }
-  const handleChangeSubTitle = (event) => {
-      setSubTitle(event.currentTarget.value)
-  }
- 
+
   const handleChangeDecsription = (value) => {
     setDescription(value)
   }
 
-  const handleChangeStartDate = (d, dateString) =>{
-    setStartDate(dateString)
-  }
-  const handleChangeEndDate = (d, dateString) =>{
-    setEndDate(dateString)
-  }
-
-  const handleChangeSkills = (event) => {
-    setSkills(event.currentTarget.value)
-  }
   const handleChangeTags = (event) => {
     setTags(event.currentTarget.value)
   }
@@ -103,23 +125,27 @@ function ProjectUploadPage(props) {
   }
 
     const variables = {
-        writer: user.userData._id,
-        projectTitle: title,
-        projectSubTitle: subTitle,
-        description: Description,
-        skills: Skills,
-        startDate: startDate,
-        endDate: endDate,
-        privacy: Privacy,
-        category: Categories,
-        tags: Tags,
-        thumbnail: FilePath
+        projectId,
+        data :{
+          writer: user.userData._id,
+          projectTitle: title,
+          projectSubTitle: subTitle,
+          description: Description,
+          skills: Skills,
+          startDate: startDate,
+          endDate: endDate,
+          privacy: Privacy,
+          category: Categories,
+          tags: Tags,
+          thumbnail: FilePath
+        }
 
     }
 
     console.log(variables);
 
-    Axios.post('/api/project/uploadProject', variables)
+    
+    Axios.post('/api/project/updateProject', variables)
           .then(response => {
             console.log(response);
               if (response.data.success) {
@@ -127,12 +153,12 @@ function ProjectUploadPage(props) {
                   setTimeout(()=> {
                     props.history.push('/project')
 
-                  },3000)
+                  },1000)
               } else {
-                  alert('Failed to upload video')
+                  alert('프로젝트업로드를 실패하였습니다. ')
               }
           })
-
+      
   };
 
   const handleChangePrivacy = (event) => {
@@ -154,31 +180,7 @@ function ProjectUploadPage(props) {
           onChange={handleChangeTitle}
           value={title}/>
         </div>
-        <div className="input_wrap">
-          <label>Sub Title</label>
-          <Input 
-            onChange={handleChangeSubTitle}
-            value={subTitle}/>
-        </div>
-        <div className="input_wrap">
-          <label>Date</label>
-          <Row gutter={24}>
-            <Col span={12}>
-            <DatePicker style={{'width': '100%'}}
-              onChange={handleChangeStartDate}
-              mode="date"
-              
-              />
-            </Col>
-            <Col span={12}>
-            <DatePicker style={{'width': '100%'}}
-              onChange={handleChangeEndDate}
-              mode="date"
-             
-              />
-            </Col>
-            </Row>
-        </div>
+    
         <Row gutter={24}>
           <Col className="input_wrap" span={12}> 
             <label>Category</label>
@@ -208,13 +210,7 @@ function ProjectUploadPage(props) {
           <ReactQuill value={Description}
           onChange={handleChangeDecsription} />
         </div>
-        <div className="input_wrap">
-          <label>Skills</label>
-          <Input
-            onChange={handleChangeSkills}
-            value={Skills}>
-          </Input>
-        </div>
+       
         <div className="input_wrap">
           <label>Tags</label>
           <Input
@@ -250,8 +246,9 @@ function ProjectUploadPage(props) {
 
       
         <div className="btn_wrap my-50 text-center">
-          <button type="button" onClick={onSubmit} className="btn blue">
-            Submit
+          <Link to="/project" className="btn ">List</Link>
+          <button type="button" onClick={onSubmit} className="btn green ml-5" >
+            Update
           </button>
         </div>
 
@@ -260,4 +257,4 @@ function ProjectUploadPage(props) {
   )
 }
 
-export default ProjectUploadPage
+export default ProjectUpdatePage

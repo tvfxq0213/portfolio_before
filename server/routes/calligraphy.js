@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const { Project } = require("../models/Project");
+const { Calligraphy } = require("../models/Calligraphy");
 
 const multer = require('multer');
 
 
 //=================================
-//             Project
+//             Calligraphy
 //=================================
 
 var storage = multer.diskStorage({
@@ -38,8 +38,8 @@ router.post('/uploadfiles', (req,res)=>{
 router.post('/uploadProject', (req,res)=>{
 
   //비디오를 정보들을 저장한다.
-  const project = new Project(req.body);
-  project.save((err, doc) => {
+  const calli = new Calligraphy(req.body);
+  calli.save((err, doc) => {
     if(err) return res.json({success: false, err})
     res.status(200).json({success: true})
   })
@@ -52,7 +52,7 @@ router.get('/getProjects', (req,res)=>{
   console.log(req.query)
 
   if(req.query.category == 0){
-    Project.find()
+    Calligraphy.find()
     .populate('writer')
     .exec((err, projects )=>{
       if(err) return res.status(400).send(err)
@@ -60,7 +60,7 @@ router.get('/getProjects', (req,res)=>{
     })
   }else{
     const category = req.query.category
-    Project.find({category})
+    Calligraphy.find({category})
     .populate('writer')
     .exec((err, projects )=>{
       if(err) return res.status(400).send(err)
@@ -73,7 +73,7 @@ router.get('/getProjects', (req,res)=>{
 router.post('/getProjectDetail', (req,res)=>{
 
   //비디오를 DB에서 가져와서 클라이언트에 보낸다.  
-  Project.findOne({ "_id" : req.body.projectId })
+  Calligraphy.findOne({ "_id" : req.body.projectId })
   .populate('writer')
   .exec((err, project) => {
       if(err) return res.status(400).send(err);
@@ -86,7 +86,7 @@ router.post('/getProjectDetail', (req,res)=>{
 
 router.post("/deleteProject", (req, res) => {
 
-  Project.findOneAndDelete({"_id":req.body.projectId})
+  Calligraphy.findOneAndDelete({"_id":req.body.projectId})
   .exec((err, result)=>{
     if(err) return res.status(400).send(err)
     return res.status(200).json({success:true})
@@ -99,17 +99,13 @@ router.post("/updateProject", (req, res) => {
   
   console.log("=======updateProject============")
   const filter = {'_id':req.body.projectId}
-
-  const project = req.body.data;
-
-
-
-  Project.findOneAndUpdate(filter, project, {
+  const calli = req.body.data;
+  Calligraphy.findOneAndUpdate(filter, calli, {
     new: true,
     upsert: true,
     rawResult: true
   })
-  .exec((err, project) => {
+  .exec((err, calli) => {
     if (err) return res.json({ success: false, err });
     return res.status(200).send({
         success: true

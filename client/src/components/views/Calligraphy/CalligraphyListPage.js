@@ -1,6 +1,7 @@
 import React from 'react'
-import {Button , Row, Col } from 'antd'
+import {Row, Col } from 'antd'
 import Item from "./Sections/Item.js";
+import {Link} from 'react-router-dom';
 
 
 function CalligraphyListPage() {
@@ -16,7 +17,7 @@ function CalligraphyListPage() {
           <span className="orderby" onClick={onHandledOrderBy('1')}>개인</span>
         </Col>
         <Col span={12} className="text-right ">
-        <Button href="/calligraphyUpload">Upload</Button>
+        <Link className="btn" to="/calligraphyUpload">Upload</Link>
         </Col>
       </Row>
       <div className="ListWrap">

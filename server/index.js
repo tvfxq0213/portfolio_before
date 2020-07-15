@@ -35,6 +35,7 @@ app.use(cookieParser());
 
 app.use('/api/users', require('./routes/users'));
 app.use('/api/project', require('./routes/project'));
+app.use('/api/calligraphy', require('./routes/calligraphy'));
 
 
 //use this to show the image you have in node js server to client (react js)

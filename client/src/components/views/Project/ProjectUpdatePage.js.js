@@ -227,8 +227,6 @@ function ProjectUpdatePage(props) {
             <label>Category</label>
             <Select onChange={handleChangeCategory} style={{'width' : '100%'}} 
             labelInValue
-            format={dateFormat}
-
             defaultValue={{ value: 1 }}>
               {CategoryOptions.map((item, index) => (
                 <Option key={index} value={item.value}>{item.label}</Option>
@@ -241,8 +239,6 @@ function ProjectUpdatePage(props) {
             onChange={handleChangePrivacy} 
             style={{'width' : '100%'}} 
             labelInValue
-            format={dateFormat}
-
             defaultValue={{ value: 0 }}>
               {PrivateOptions.map((item, index) => (
                 <Option key={index} value={item.value}>{item.label}</Option>
