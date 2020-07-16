@@ -155,9 +155,6 @@ function ProjectUpdatePage(props) {
         }
 
     }
-
-    console.log(variables);
-
     
     Axios.post('/api/project/updateProject', variables)
           .then(response => {
