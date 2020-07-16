@@ -5,28 +5,53 @@ import Item from "./Sections/Item.js";
 import Axios from "axios"
 function ProjectListPage(props) {
   
-
+  const [CurrentPage, setCurrentPage] = useState(0);
   const [Project, setProject] = useState([]);
   const [category, setCategory] = useState(0)
 
   useEffect(() => {
-
       Axios.get('/api/project/getProjects', {
         params: {
-          category
+          category,
+          CurrentPage
         }
       })
       .then(response => {
           if(response.data.success){
               console.log(response.data.projects)
               console.log(category)
-              setProject(response.data.projects)
+              setProject([...Project, ...response.data.projects])
+              setCurrentPage(response.page)
+
           }else{
               alert("비디오 가져오기를 실패 했습니다.");
           }
       })
      
   }, [category])
+
+
+  const LoadMoreItems = () => {
+    Axios.get('/api/project/getProjects', {
+      params: {
+        category,
+        CurrentPage: CurrentPage+1
+      }
+    })
+    .then(response => {
+        if(response.data.success){
+            console.log(response.data.projects)
+            console.log(category)
+            setProject([...Project, ...response.data.projects])
+            setCurrentPage(response.page)
+
+        }else{
+            alert("비디오 가져오기를 실패 했습니다.");
+        }
+    })
+
+}
+
 
   function onHandledCategory(event){
     console.log(event.target.dataset.category);
@@ -57,6 +82,10 @@ function ProjectListPage(props) {
         <Row  gutter={24}>
           {renderProject}
         </Row>
+        <div className="display-flex align-items-center justify-content-center">
+          <span className="btn" onClick={LoadMoreItems}>More</span>
+
+        </div>
       </div>
     </div>
   )

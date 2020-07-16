@@ -11,7 +11,7 @@ function CalligraphyListPage() {
   return (
     <div className="container">
       <Row  gutter={{ xs: 8, sm: 16, md: 24 }}>
-        <Col class="" span={12}>
+        <Col className="" span={12}>
           <span className="orderby" onClick={onHandledOrderBy('')}>All</span>
           <span className="orderby" onClick={onHandledOrderBy('2')}>회사</span>
           <span className="orderby" onClick={onHandledOrderBy('1')}>개인</span>
