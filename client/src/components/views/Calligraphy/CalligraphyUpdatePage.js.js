@@ -45,7 +45,7 @@ function ProjectUpdatePage(props) {
 
 
   useEffect(()=>{
-    Axios.post('/api/project/getProjectDetail', variable)
+    Axios.post('/api/calligraphy/getProjectDetail', variable)
     .then(response => {
         if (response.data.success) {
            const projectDetail = response.data.project;
@@ -92,7 +92,7 @@ function ProjectUpdatePage(props) {
     }
     formData.append("file", files[0])
 
-    Axios.post('/api/project/uploadfiles', formData, config)
+    Axios.post('/api/calligraphy/uploadfiles', formData, config)
         .then(response => {
             if (response.data.success) {
                 let variable = {
@@ -145,13 +145,13 @@ function ProjectUpdatePage(props) {
     console.log(variables);
 
     
-    Axios.post('/api/project/updateProject', variables)
+    Axios.post('/api/calligraphy/updateProject', variables)
           .then(response => {
             console.log(response);
               if (response.data.success) {
                   alert('프로젝트가 성공적으로 업로드되었습니다.')
                   setTimeout(()=> {
-                    props.history.push('/project')
+                    props.history.push('/calligraphy')
 
                   },1000)
               } else {

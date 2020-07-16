@@ -1,21 +1,32 @@
+
 import React from 'react'
 import {Tag} from 'antd'
+import {Link} from 'react-router-dom';
+
 
 function Item(props) {
+  const project = props.Project;
+  
+  const tags = project.tags ? project.tags.split(',') : [];
+
 
   return (
     <div className="item">
-      <a href="/calligraphy/12">
-        <img className="thumbnail" src="" alt="thumbnail" title="thumbnail"/>
+      <Link to={`/calligraphy/${project._id}`}>
+        
+  
+        <img className="thumbnail" src={`http://localhost:5000/${project.thumbnail}`} ></img>
         <h3>
-          Title
+          {project.projectTitle}
         </h3>
         <div className="tag_wrap">
-          <Tag color="geekblue">HTML</Tag> 
-          <Tag color="geekblue">CSS</Tag>          
-          
+        {tags.map((tag, index) => {
+            return <Tag color="geekblue" key={index}>{tag}</Tag>
+          })
+          }
         </div>
-      </a>
+      </Link>
+      
     </div>
   )
 }

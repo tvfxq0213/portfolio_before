@@ -20,8 +20,8 @@ const calligraphySchema = mongoose.Schema({
     description:{
         type: String,
     },
-    category:{
-        type:String
+    tags : {
+        type:String,
     },
     privacy:{
         type:Number

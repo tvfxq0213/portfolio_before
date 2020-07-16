@@ -17,10 +17,7 @@ const PrivateOptions = [
   { value: 0, label: 'Private' },
   { value: 1, label: 'Public' }
 ]
-const CategoryOptions = [
-  { value: 1, label: "회사 프로젝트" },
-  { value: 2, label: "개인 프로젝트" },
-]
+
 function CalligraphyUploadPage(props) {
   const user = useSelector(state => state.user);
 
@@ -28,7 +25,6 @@ function CalligraphyUploadPage(props) {
   const [Description, setDescription] = useState("");
   const [Tags, setTags] = useState("")
   const [Privacy, setPrivacy] = useState(0)
-  const [Categories, setCategories] = useState(1)
   const [FilePath, setFilePath] = useState("")
 
 
@@ -54,7 +50,7 @@ function CalligraphyUploadPage(props) {
     }
     formData.append("file", files[0])
 
-    Axios.post('/api/project/uploadfiles', formData, config)
+    Axios.post('/api/calligraphy/uploadfiles', formData, config)
         .then(response => {
             if (response.data.success) {
                 let variable = {
@@ -79,7 +75,7 @@ function CalligraphyUploadPage(props) {
   }
 
   if (title === "" || Description === "" ||
-      Categories === "" || Privacy === "" ||
+      Privacy === "" ||
       Tags === "" ) {
       return alert('Please first fill all the fields')
   }
@@ -89,7 +85,6 @@ function CalligraphyUploadPage(props) {
         projectTitle: title,
         description: Description,
         privacy: Privacy,
-        category: Categories,
         tags: Tags,
         thumbnail: FilePath
 
@@ -97,15 +92,15 @@ function CalligraphyUploadPage(props) {
 
     console.log(variables);
 
-    Axios.post('/api/project/uploadProject', variables)
+    Axios.post('/api/calligraphy/uploadProject', variables)
           .then(response => {
             console.log(response);
               if (response.data.success) {
                   alert('프로젝트가 성공적으로 업로드되었습니다.')
                   setTimeout(()=> {
-                    props.history.push('/project')
+                    props.history.push('/calligraphy')
 
-                  },3000)
+                  },1000)
               } else {
                   alert('Failed to upload video')
               }
@@ -115,10 +110,6 @@ function CalligraphyUploadPage(props) {
 
   const handleChangePrivacy = (event) => {
     setPrivacy(event.value)
-  }
-
-  const handleChangeCategory = (event) => {
-     setCategories(event.value)
   }
 
 
@@ -135,16 +126,6 @@ function CalligraphyUploadPage(props) {
       
         
         <Row gutter={24}>
-          <Col className="input_wrap" span={12}> 
-            <label>Category</label>
-            <Select onChange={handleChangeCategory} style={{'width' : '100%'}} 
-            labelInValue
-            defaultValue={{ value: 1 }}>
-              {CategoryOptions.map((item, index) => (
-                <Option key={index} value={item.value}>{item.label}</Option>
-              ))}
-            </Select>
-          </Col>
           <Col className="input_wrap" span={12}> 
             <label>Privacy</label>
             <Select 
