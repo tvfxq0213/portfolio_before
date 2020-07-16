@@ -121,8 +121,6 @@ function CalligraphyUploadPage(props) {
 
     }
 
-    console.log(variables);
-
     Axios.post('/api/calligraphy/updateProject', variables)
           .then(response => {
             console.log(response);
