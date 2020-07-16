@@ -1,65 +1,48 @@
 import React, {useState, useEffect} from 'react'
-import { Form, Input, DatePicker, Col, Row,  Upload, message , Button, Select } from 'antd';
+import { Form, Input,  Col, Row, Select } from 'antd';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import Dropzone from 'react-dropzone';
 import { useSelector } from "react-redux";
-import moment from "moment";
-import {Link} from 'react-router-dom';
+import Axios from 'axios';
 import ReactQuill from 'react-quill'; // ES6
 import 'react-quill/dist/quill.snow.css'; // ES6
 
-
-import Axios from 'axios';
-
-const {TextArea} = Input;
 const {Option} = Select;
-
+const layout = {
+  labelCol: { span: 8 },
+  wrapperCol: { span: 16 },
+};
 
 const PrivateOptions = [
   { value: 0, label: 'Private' },
   { value: 1, label: 'Public' }
 ]
 
-const CategoryOptions = [
-  { value: 1, label: "회사 프로젝트" },
-  { value: 2, label: "개인 프로젝트" },
-]
+function CalligraphyUploadPage(props) {
 
-
-
-function ProjectUpdatePage(props) {
-  const user = useSelector(state => state.user);
-  const projectId = props.match.params.projectId
+  const projectId = props.match.params.calligraphyId
   const variable = {
     projectId
   }
-
+  const user = useSelector(state => state.user);
   const [ProjectDetail, setProjectDetail] = useState([]);
   const [title, setTitle] = useState("");
   const [Description, setDescription] = useState("");
-
   const [Tags, setTags] = useState("")
   const [Privacy, setPrivacy] = useState(0)
-  const [Categories, setCategories] = useState(1)
   const [FilePath, setFilePath] = useState("")
-
 
   useEffect(()=>{
     Axios.post('/api/calligraphy/getProjectDetail', variable)
     .then(response => {
         if (response.data.success) {
+          console.log(response.data.project)
            const projectDetail = response.data.project;
             setProjectDetail(projectDetail)
             setTitle(projectDetail.projectTitle);
-            setSubTitle(projectDetail.projectSubTitle);
             setDescription(projectDetail.description);
-            setStartDate(moment(projectDetail.startDate,dateFormat));
-            setEndDate(moment(projectDetail.endDate, dateFormat));
-            setSkills(projectDetail.skills)
             setTags(projectDetail.tags)
             setFilePath(projectDetail.thumbnail);
-
-
 
             if(response.data.project.writer._id === localStorage.getItem('userId')){ 
               // 작성자와 로그인한 userId가 같아야 삭제 버튼이 나타남
@@ -72,14 +55,17 @@ function ProjectUpdatePage(props) {
   }, [projectId]) //  props.match.params.videoId가 바뀔때만 재구독한다. 
 
 
+
   const handleChangeTitle = (event) => {
       setTitle(event.currentTarget.value)
   }
-
+ 
+ 
   const handleChangeDecsription = (value) => {
     setDescription(value)
   }
 
+  
   const handleChangeTags = (event) => {
     setTags(event.currentTarget.value)
   }
@@ -117,34 +103,26 @@ function ProjectUpdatePage(props) {
   }
 
   if (title === "" || Description === "" ||
-      Categories === "" || subTitle === "" ||
-      startDate === "" || endDate === "" ||
-      Skills === "" || Privacy === "" ||
+      Privacy === "" ||
       Tags === "" ) {
       return alert('Please first fill all the fields')
   }
 
     const variables = {
-        projectId,
-        data :{
-          writer: user.userData._id,
-          projectTitle: title,
-          projectSubTitle: subTitle,
-          description: Description,
-          skills: Skills,
-          startDate: startDate,
-          endDate: endDate,
-          privacy: Privacy,
-          category: Categories,
-          tags: Tags,
-          thumbnail: FilePath
-        }
+      projectId,
+      data : {
+        writer: user.userData._id,
+        projectTitle: title,
+        description: Description,
+        privacy: Privacy,
+        tags: Tags,
+        thumbnail: FilePath
+      }
 
     }
 
     console.log(variables);
 
-    
     Axios.post('/api/calligraphy/updateProject', variables)
           .then(response => {
             console.log(response);
@@ -155,18 +133,14 @@ function ProjectUpdatePage(props) {
 
                   },1000)
               } else {
-                  alert('프로젝트업로드를 실패하였습니다. ')
+                  alert('Failed to upload video')
               }
           })
-      
+
   };
 
   const handleChangePrivacy = (event) => {
     setPrivacy(event.value)
-  }
-
-  const handleChangeCategory = (event) => {
-     setCategories(event.value)
   }
 
 
@@ -180,18 +154,9 @@ function ProjectUpdatePage(props) {
           onChange={handleChangeTitle}
           value={title}/>
         </div>
-    
+      
+        
         <Row gutter={24}>
-          <Col className="input_wrap" span={12}> 
-            <label>Category</label>
-            <Select onChange={handleChangeCategory} style={{'width' : '100%'}} 
-            labelInValue
-            defaultValue={{ value: 1 }}>
-              {CategoryOptions.map((item, index) => (
-                <Option key={index} value={item.value}>{item.label}</Option>
-              ))}
-            </Select>
-          </Col>
           <Col className="input_wrap" span={12}> 
             <label>Privacy</label>
             <Select 
@@ -210,7 +175,7 @@ function ProjectUpdatePage(props) {
           <ReactQuill value={Description}
           onChange={handleChangeDecsription} />
         </div>
-       
+        
         <div className="input_wrap">
           <label>Tags</label>
           <Input
@@ -246,9 +211,8 @@ function ProjectUpdatePage(props) {
 
       
         <div className="btn_wrap my-50 text-center">
-          <Link to="/project" className="btn ">List</Link>
-          <button type="button" onClick={onSubmit} className="btn green ml-5" >
-            Update
+          <button type="button" onClick={onSubmit} className="btn blue">
+            Submit
           </button>
         </div>
 
@@ -257,4 +221,4 @@ function ProjectUpdatePage(props) {
   )
 }
 
-export default ProjectUpdatePage
+export default CalligraphyUploadPage

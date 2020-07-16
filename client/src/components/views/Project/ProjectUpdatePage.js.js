@@ -11,7 +11,6 @@ import 'react-quill/dist/quill.snow.css'; // ES6
 
 import Axios from 'axios';
 
-const {TextArea} = Input;
 const {Option} = Select;
 
 

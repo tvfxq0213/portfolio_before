@@ -8,6 +8,8 @@ import RegisterPage from "./views/RegisterPage/RegisterPage.js";
 import CalligraphyListPage from "./views/Calligraphy/CalligraphyListPage.js"
 import CalligraphyDetailPage from './views/Calligraphy/CalligraphyDetailPage.js'
 import CalligraphyUploadPage from "./views/Calligraphy/CalligraphyUploadPage.js"
+import CalligraphyUpdatePage from "./views/Calligraphy/CalligraphyUpdatePage.js"
+
 import ProjectListPage from "./views/Project/ProjectListPage.js";
 import ProjectDetailPage from "./views/Project/ProjectDetailPage.js";
 import ProjectUploadPage from "./views/Project/ProjectUploadPage.js"
@@ -36,6 +38,8 @@ function App() {
           <Route exact path="/calligraphy" component={Auth(CalligraphyListPage, null)} />
           <Route exact path="/calligraphyUpload" component={Auth(CalligraphyUploadPage, true)} />
           <Route exact path="/calligraphy/:calligraphyId" component={Auth(CalligraphyDetailPage, true)}/>
+          <Route exact path="/calligraphy/update/:calligraphyId" component={Auth(CalligraphyUpdatePage, true)}/>
+
         </Switch>
       </div>
       <Footer />
