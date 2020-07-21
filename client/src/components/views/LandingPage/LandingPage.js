@@ -1,13 +1,24 @@
 import React from 'react'
-import { FaCode } from "react-icons/fa";
+import { Carousel } from 'antd';
+
 
 function LandingPage() {
     return (
         <>
-        <div className="app">
-            <FaCode style={{ fontSize: '4rem' }} /><br />
-            <span style={{ fontSize: '2rem' }}>Let's Start Coding!</span>
-        </div>
+        <Carousel autoplay>
+            <div>
+            <h3>1</h3>
+            </div>
+            <div>
+            <h3>2</h3>
+            </div>
+            <div>
+            <h3>3</h3>
+            </div>
+            <div>
+            <h3>4</h3>
+            </div>
+        </Carousel>
         </>
     )
 }

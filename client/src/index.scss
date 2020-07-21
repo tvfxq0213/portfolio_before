@@ -290,6 +290,16 @@ footer{
     background:$primary_color2;
   }
 }
+.ant-carousel .slick-slide {
+  text-align: center;
+  height: 160px;
+  line-height: 160px;
+  background: #364d79;
+  overflow: hidden;
+  h3 {
+    color: #fff;
+  }
+}
 .ListWrap{
   margin-top:15px;
   margin-bottom:30px;
