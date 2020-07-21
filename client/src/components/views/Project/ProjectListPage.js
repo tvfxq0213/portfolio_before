@@ -3,54 +3,57 @@ import { Col, Row} from 'antd';
 import {Link} from 'react-router-dom';
 import Item from "./Sections/Item.js";
 import Axios from "axios"
+
+
 function ProjectListPage(props) {
-  
+
   const [CurrentPage, setCurrentPage] = useState(0);
   const [Project, setProject] = useState([]);
-  const [category, setCategory] = useState(0)
+  const [category, setCategory] = useState(0);
 
-  useEffect(() => {
-      Axios.get('/api/project/getProjects', {
-        params: {
-          category,
-          CurrentPage
-        }
+  const LoadMoreItems = () => {
+    const endpoint = `/api/project/getProjects`;
+    const param = {
+      category,
+      CurrentPage: CurrentPage+1
+    }
+    AxiosProject(endpoint,param);
+
+  }
+
+
+    const AxiosProject = (endpoint,param) => {
+      Axios.get(endpoint, {
+        params: param
       })
       .then(response => {
           if(response.data.success){
               console.log(response.data.projects)
               console.log(category)
               setProject([...Project, ...response.data.projects])
-              setCurrentPage(response.page)
+              setCurrentPage(param.CurrentPage)
 
           }else{
               alert("비디오 가져오기를 실패 했습니다.");
           }
       })
+
+    }
+  useEffect(() => {
+    const endpoint = `/api/project/getProjects`;
+    const param = {
+      category,
+      CurrentPage
+    }
+    AxiosProject(endpoint,param);
      
   }, [category])
 
+  const handleChangeOrderBy = () =>{
 
-  const LoadMoreItems = () => {
-    Axios.get('/api/project/getProjects', {
-      params: {
-        category,
-        CurrentPage: CurrentPage+1
-      }
-    })
-    .then(response => {
-        if(response.data.success){
-            console.log(response.data.projects)
-            console.log(category)
-            setProject([...Project, ...response.data.projects])
-            setCurrentPage(response.page)
+  }
 
-        }else{
-            alert("비디오 가져오기를 실패 했습니다.");
-        }
-    })
 
-}
 
 
   function onHandledCategory(event){
@@ -69,12 +72,18 @@ function ProjectListPage(props) {
   return (
     <div className="container">
       <Row  gutter={24}>
-        <Col className="" span={12}>
+        <Col className="" span={8}>
           <span className="CategoryTab" data-category="0" onClick={onHandledCategory}>All</span>
           <span className="CategoryTab" data-category="1" onClick={onHandledCategory}>회사</span>
           <span className="CategoryTab" data-category="2" onClick={onHandledCategory}>개인</span>
         </Col>
-        <Col className="" span={12} className="text-right ">
+        <Col className="" span={8}>
+          <select id="orderby" onChange={handleChangeOrderBy}>
+            <option value="latest">최신순</option>
+            <option value="name">이름순</option>
+          </select>
+        </Col>
+        <Col className="" span={8} className="text-right ">
           <Link to="/projectUpload" className="btn">Upload</Link>
         </Col>
       </Row>
