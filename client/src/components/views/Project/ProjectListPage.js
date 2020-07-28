@@ -10,17 +10,17 @@ function ProjectListPage(props) {
   const [CurrentPage, setCurrentPage] = useState(0);
   const [Project, setProject] = useState([]);
   const [category, setCategory] = useState(0);
+  const [orderBy, setorderBy] = useState("latest");
 
   const LoadMoreItems = () => {
     const endpoint = `/api/project/getProjects`;
     const param = {
       category,
-      CurrentPage: CurrentPage+1
+      CurrentPage: CurrentPage+1,
+      orderBy
     }
     AxiosProject(endpoint,param);
-
   }
-
 
     const AxiosProject = (endpoint,param) => {
       Axios.get(endpoint, {
@@ -43,17 +43,16 @@ function ProjectListPage(props) {
     const endpoint = `/api/project/getProjects`;
     const param = {
       category,
-      CurrentPage
+      CurrentPage,
+      orderBy
     }
     AxiosProject(endpoint,param);
      
   }, [category])
 
   const handleChangeOrderBy = () =>{
-
+    setorderBy(setorderBy)
   }
-
-
 
 
   function onHandledCategory(event){
