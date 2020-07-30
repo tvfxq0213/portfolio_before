@@ -87,7 +87,7 @@ function ProjectListPage(props) {
         </Col>
       </Row>
       <div className="ListWrap">
-        <Row  gutter={24}>
+        <Row gutter={24}>
           {renderProject}
         </Row>
         <div className="display-flex align-items-center justify-content-center">
