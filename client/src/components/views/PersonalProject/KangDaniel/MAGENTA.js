@@ -5,8 +5,12 @@ function MAGENTA() {
     <div>
 
       <ul className="trackList">
-        <li></li>
-        <li></li>
+        <li>Flash</li>
+        <li>Waves</li>
+        <li>깨워</li>
+        <li>Runaway</li>
+        <li>Movie</li>
+        <li>밤</li>
       </ul>
       
     </div>
