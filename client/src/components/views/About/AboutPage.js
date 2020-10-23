@@ -1,5 +1,5 @@
 import React from 'react'
-import {Row, Col, Timeline} from 'antd'
+import {Timeline} from 'antd'
 import { ClockCircleOutlined } from '@ant-design/icons';
 
 function AboutPage() {

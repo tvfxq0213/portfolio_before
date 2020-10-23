@@ -22,7 +22,7 @@ const upload = multer({storage:storage}).single("file")
 
 router.post('/uploadfiles', (req,res)=>{
 
-  //비디오를 서버에 저장한다. 
+  //이미지를 서버에 저장한다. 
   upload(req, res, err =>{
     if(err) {
       return res.json({success: false, err})
@@ -37,7 +37,7 @@ router.post('/uploadfiles', (req,res)=>{
 
 router.post('/uploadProject', (req,res)=>{
 
-  //비디오를 정보들을 저장한다.
+  //이미지를 정보들을 저장한다.
   const project = new Project(req.body);
   project.save((err, doc) => {
     if(err) return res.json({success: false, err})
@@ -48,7 +48,7 @@ router.post('/uploadProject', (req,res)=>{
 
 router.get('/getProjects', (req,res)=>{
 
-  //비디오를 DB에서 가져와서 클라이언트에 보낸다. 
+  //이미지를 DB에서 가져와서 클라이언트에 보낸다. 
   console.log(req.query)
 
   if(req.query.category == 0){
@@ -72,7 +72,7 @@ router.get('/getProjects', (req,res)=>{
 
 router.post('/getProjectDetail', (req,res)=>{
 
-  //비디오를 DB에서 가져와서 클라이언트에 보낸다.  
+  //이미지를 DB에서 가져와서 클라이언트에 보낸다.  
   Project.findOne({ "_id" : req.body.projectId })
   .populate('writer')
   .exec((err, project) => {
