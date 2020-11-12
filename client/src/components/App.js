@@ -4,6 +4,7 @@ import Auth from "../hoc/auth";
 // pages for this product
 import LandingPage from "./views/LandingPage/LandingPage.js";
 import HBDLandingPage from "./views/HBDKD/LandingPage.js"
+import HBDMsgPage from "./views/HBDKD/MsgForm.js"
 import LoginPage from "./views/LoginPage/LoginPage.js";
 import RegisterPage from "./views/RegisterPage/RegisterPage.js";
 import CalligraphyListPage from "./views/Calligraphy/CalligraphyListPage.js"
@@ -27,7 +28,6 @@ function App() {
       <div style={{ paddingTop: '69px', minHeight: 'calc(100vh - 80px)' }}>
         <Switch>
           <Route exact path="/" component={Auth(LandingPage, null)} />
-          <Route exact path="/HBDKD" component={Auth(HBDLandingPage, null)} />
           <Route exact path="/login" component={Auth(LoginPage, false)} />
           <Route exact path="/register" component={Auth(RegisterPage, false)} />
           <Route exact path="/about" component={Auth(AboutPage, null)} />
@@ -41,6 +41,10 @@ function App() {
           <Route exact path="/calligraphyUpload" component={Auth(CalligraphyUploadPage, true)} />
           <Route exact path="/calligraphy/:calligraphyId" component={Auth(CalligraphyDetailPage, true)}/>
           <Route exact path="/calligraphy/update/:calligraphyId" component={Auth(CalligraphyUpdatePage, true)}/>
+
+          <Route exact path="/HBDKD" component={Auth(HBDLandingPage, null)} />
+          <Route exact path="/HBDKD/MSG" component={Auth(HBDMsgPage, null)} />
+
 
         </Switch>
       </div>
