@@ -48,6 +48,14 @@ body {
   background-color: $white;
 }
 
+footer{
+  p{
+    font-size:12px; 
+    color:$primary1_desaturate80;
+    margin:0;
+  }
+}
+
 .app {
   flex-direction: column;
   display: flex;
@@ -58,6 +66,21 @@ body {
 
 input.error {
   border-color: $primary1_lighten20;
+}
+.sns-wrap{
+  ul{
+    list-style:none;
+    padding:0;
+    margin:0;
+    display:flex;
+    li{
+      padding: 5px;
+      a {
+        color:$primary1_desaturate80;
+        font-size: 16px;
+      }
+    }
+  }
 }
 
 
@@ -294,12 +317,32 @@ footer{
   text-align: center;
   height: 160px;
   line-height: 160px;
-  background: #364d79;
+  background: $primary_color2;
   overflow: hidden;
   h3 {
-    color: #fff;
+    color: $white;
+  }
+  p{
+    color:$white;
   }
 }
+
+.title{
+  position: relative;
+  margin-bottom:30px;
+  &:after{
+    content:"";
+    position: absolute;
+    width:20px;
+    height:4px;
+    display:inline-block;
+    background:$primary1_darken20;
+    bottom:-5px;
+    left:calc(50% - 10px);
+  }
+}
+  
+
 .ListWrap{
   margin-top:15px;
   margin-bottom:30px;
