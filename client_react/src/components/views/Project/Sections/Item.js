@@ -7,8 +7,6 @@ import moment from 'moment';
 function Item(props) {
   const project = props.Project;
   const tags = project.tags.split(',');
-
-
   return (
     <div className="item">
       <Link to={`/project/${project._id}`}>

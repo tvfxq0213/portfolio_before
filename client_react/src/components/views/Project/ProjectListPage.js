@@ -13,6 +13,7 @@ function ProjectListPage(props) {
   const [orderBy, setorderBy] = useState("latest");
 
   const LoadMoreItems = () => {
+    console.log(CurrentPage);
     const endpoint = `/api/project/getProjects`;
     const param = {
       category,
@@ -30,7 +31,10 @@ function ProjectListPage(props) {
           if(response.data.success){
               console.log(response.data.projects)
               console.log(category)
-              setProject([...Project, ...response.data.projects])
+              console.log(CurrentPage);
+                setProject([, ...response.data.projects])
+            
+
               setCurrentPage(param.CurrentPage)
 
           }else{

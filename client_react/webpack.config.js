@@ -22,4 +22,12 @@ module.exports = {
     // ...other rules
   }],
   // ...other config
+  plugins : [
+    new HtmlWebpackPlugin({
+        title : 'Narae Portfolio',
+        hash : true,
+        filename : 'index.html',
+        template: './public/index.html'
+    }),
+  ]
 }

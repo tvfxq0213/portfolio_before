@@ -51,6 +51,8 @@ router.get('/getProjects', (req,res)=>{
   //이미지를 DB에서 가져와서 클라이언트에 보낸다. 
   console.log(req.query)
 
+  const category = req.query.category == 0 ? '' : req.query.category
+
   if(req.query.category == 0){
     Project.find()
     .populate('writer')
@@ -59,7 +61,6 @@ router.get('/getProjects', (req,res)=>{
       res.status(200).json({success: true, projects})
     })
   }else{
-    const category = req.query.category
     Project.find({category})
     .populate('writer')
     .exec((err, projects )=>{
